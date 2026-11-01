@@ -63,3 +63,8 @@ build/
 # 「逛彩」为「广彩」笔误，正确命名的副本已生成；原文件待进程释放后删除
 images/逛彩龙纹双耳象瓶.jpg
 images/逛彩龙纹双耳象瓶_上部特写.png
+
+# ---------- oil-ui 技能工作区（过程文件，不入库）----------
+.oil-ui/
+.curate-cache.json
+manifest.json
