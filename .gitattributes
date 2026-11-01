@@ -1,0 +1,22 @@
+# 统一换行符与中文路径显示
+# 仓库内一律存 LF；工作区检出按平台自动
+* text=auto eol=lf
+
+# Markdown / 文本：强制 LF
+*.md    text eol=lf
+*.txt   text eol=lf
+*.json  text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+
+# 二进制：禁止任何换行转换
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.psd   binary
+*.ai    binary
+*.jsd   binary
+*.mp4   binary
+*.pdf   binary
+*.svg   text eol=lf
+*.xmind binary
