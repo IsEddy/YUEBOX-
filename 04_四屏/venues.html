@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=375, initial-scale=1">
+<meta name="dsh-design" content="app 375x812">
+<title>08 · 虚拟展厅 · 导览</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="motion.css">
+<link rel="stylesheet" href="s8.css">
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <symbol id="ic-01" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M12 5 19 9 12 13 5 9Z"/><path d="M5 9 12 13 12 19 5 15Z"/><path d="M12 13 19 9 19 15 12 19Z"/><path d="M9 9 15 9"/></g></symbol>
+  <symbol id="ic-02" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="16" height="16"/><path d="M12 4v16M4 12h16"/><rect x="4" y="4" width="8" height="8" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-04" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><rect x="10" y="10" width="4" height="4"/></g></symbol>
+  <symbol id="ic-05" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="5" y="5" width="14" height="14"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-07" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M15 5 8 12l7 7"/></g></symbol>
+  <symbol id="ic-08" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M14 4h6v6M20 4l-9 9"/><path d="M15 10v10H4V10"/></g></symbol>
+  <symbol id="ic-signal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M3 16v3M8 13v6M13 9v10M18 5v14"/></g></symbol>
+  <symbol id="ic-wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 9a15 15 0 0 1 18 0M6 12a10 10 0 0 1 12 0M9 15a6 6 0 0 1 6 0"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-battery" viewBox="0 0 28 24"><g fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="7" width="21" height="10" rx="1"/><path d="M25 10v4"/><rect x="4" y="9" width="14" height="6" fill="currentColor" stroke="none"/></g></symbol>
+</svg>
+
+<main id="s8-venue" class="screen" data-screen="S8" data-verb="导览">
+  <header class="statusbar" aria-label="状态栏">
+    <span>9:41</span>
+    <span class="right">
+      <svg width="16" height="16" aria-hidden="true"><use href="#ic-signal"/></svg>
+      <svg width="16" height="16" aria-hidden="true"><use href="#ic-wifi"/></svg>
+      <svg width="22" height="16" aria-hidden="true"><use href="#ic-battery"/></svg>
+    </span>
+  </header>
+
+  <div class="head enter" style="--i:0">
+    <span class="seq">08</span>
+    <h1>虚拟展厅</h1>
+    <p class="sub"><b data-el="count">—</b> 个线上展厅 · 点开即进</p>
+  </div>
+
+  <section class="vlist" data-el="list"></section>
+
+  <section class="empty" data-state="empty" hidden>
+    <svg width="32" height="32" aria-hidden="true"><use href="#ic-04"/></svg>
+    <h2>展厅还没上线</h2>
+    <p>馆方的虚拟展厅数据暂未取到</p>
+  </section>
+
+  <nav class="tabbar" aria-label="主导航">
+    <a href="splash.html"><svg aria-hidden="true"><use href="#ic-01"/></svg><span>宝盒</span></a>
+    <a href="category.html"><svg aria-hidden="true"><use href="#ic-02"/></svg><span>分格</span></a>
+    <a href="ar.html"><svg aria-hidden="true"><use href="#ic-04"/></svg><span>唤物</span></a>
+    <a href="category.html?drawer=1"><svg aria-hidden="true"><use href="#ic-05"/></svg><span>藏印</span></a>
+  </nav>
+  <div class="home-indicator" aria-hidden="true"></div>
+</main>
+
+<script src="data/gm-venues.js"></script>
+<script>
+/* 场馆数据：从 gdmuseum-relics.json 的 venues 抽取后内联 */
+
+(function () {
+  const root = document.getElementById('s8-venue');
+  const q = (s) => root.querySelector(s);
+  const V = (window.GM_VENUES || []).filter(v => v && v.name && v.url);
+
+  q('[data-el="count"]').textContent = V.length;
+
+  q('[data-el="list"]').innerHTML = V.map((v, i) => `
+    <a class="vcard" href="${v.url}" target="_blank" rel="noopener" data-i="${i}">
+      <span class="vcover">
+        ${v.imgUrl ? `<img src="${v.imgUrl}" alt="${v.name}" loading="lazy" onerror="this.style.display='none'">` : ''}
+        <span class="vbadge">360° 展厅</span>
+      </span>
+      <span class="vbody">
+        <span class="vname">${v.name}</span>
+        <span class="vmeta">线上全景 · 点开进入</span>
+      </span>
+    </a>`).join('');
+
+  q('[data-state="empty"]').hidden = V.length > 0;
+  q('[data-el="list"]').hidden = V.length === 0;
+})();
+</script>
+</body>
+</html>
