@@ -45,6 +45,7 @@
 #s6-all .row{display:flex;gap:12px;padding:12px 24px;border-bottom:1px solid rgba(201,162,39,.08);align-items:center;background:transparent;transition:background 140ms}
 #s6-all .row:active{background:rgba(201,162,39,.06)}
 #s6-all .row .thumb{width:64px;height:64px;flex:0 0 64px;border-radius:var(--r-box);overflow:hidden;background:var(--ink-700);display:grid;place-items:center}
+#s6-all .row .thumb.blank::after{content:"藏品";font:var(--t-tag);color:rgba(255,255,255,.28)}
 #s6-all .row .thumb img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
 #s6-all .row .thumb .noimg{width:100%;height:100%;background:linear-gradient(135deg,var(--ink-700),var(--ink-500))}
 #s6-all .row .thumb.blank::after{content:"无图";font:var(--t-tag);color:rgba(255,255,255,.3)}

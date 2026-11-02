@@ -67,17 +67,14 @@
 
   q('[data-el="count"]').textContent = V.length;
 
-  q('[data-el="list"]').innerHTML = V.map((v, i) => `
-    <a class="vcard" href="${v.url}" target="_blank" rel="noopener" data-i="${i}">
-      <span class="vcover">
-        ${v.imgUrl ? `<img src="${v.imgUrl}" alt="${v.name}" loading="lazy" onerror="this.style.display='none'">` : ''}
-        <span class="vbadge">360° 展厅</span>
-      </span>
-      <span class="vbody">
-        <span class="vname">${v.name}</span>
-        <span class="vmeta">线上全景 · 点开进入</span>
-      </span>
-    </a>`).join('');
+  q('[data-el="list"]').innerHTML = V.map(function (v, i) {
+    var img = v.imgUrl ? '<img src="' + v.imgUrl + '" alt="' + (v.name || '') + '" loading="lazy">' : '';
+    var meta = v.desc ? v.desc.slice(0, 42) + '…' : '线上全景 · 点开进入';
+    return '<a class="vcard" href="' + v.url + '" target="_blank" rel="noopener" data-i="' + i + '">'
+      + '<span class="vcover">' + img + '<span class="vbadge">360° 展厅</span></span>'
+      + '<span class="vbody"><span class="vname">' + v.name + '</span>'
+      + '<span class="vmeta">' + meta + '</span></span></a>';
+  }).join('');
 
   q('[data-state="empty"]').hidden = V.length > 0;
   q('[data-el="list"]').hidden = V.length === 0;

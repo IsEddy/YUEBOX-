@@ -171,9 +171,9 @@
     const shown = hits.slice(0, state.page * PAGE);
     q('[data-el="list"]').innerHTML = shown.map((r, i) => `
       <a class="row" role="listitem" href="detail-gm.html?id=${r.id}" data-id="${r.id}">
-        <span class="thumb">${r.img
-          ? `<img src="${r.img}" alt="${r.name}" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('blank')">`
-          : `<span class="noimg"></span>`}</span>
+        <span class="thumb${r.img ? '' : ' blank'}">${r.img
+          ? `<img src="${r.img}" alt="${r.name}" loading="lazy">`
+          : ''}</span>
         <span class="body">
           <span class="name">${r.name}</span>
           <span class="meta">${[r.dynasty, r.category].filter(Boolean).join(' · ')}</span>
