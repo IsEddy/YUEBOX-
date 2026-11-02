@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=375, initial-scale=1">
+<meta name="dsh-design" content="app 375x812">
+<title>藏品详情 · 导览</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="motion.css">
+<link rel="stylesheet" href="s7.css">
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <symbol id="ic-04" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><rect x="10" y="10" width="4" height="4"/></g></symbol>
+  <symbol id="ic-05" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="5" y="5" width="14" height="14"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-07" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M15 5 8 12l7 7"/></g></symbol>
+  <symbol id="ic-08" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M14 4h6v6M20 4l-9 9"/><path d="M15 10v10H4V10"/></g></symbol>
+  <symbol id="ic-10" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M6 6l12 12M18 6 6 18"/></g></symbol>
+  <symbol id="ic-signal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M3 16v3M8 13v6M13 9v10M18 5v14"/></g></symbol>
+  <symbol id="ic-wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 9a15 15 0 0 1 18 0M6 12a10 10 0 0 1 12 0M9 15a6 6 0 0 1 6 0"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-battery" viewBox="0 0 28 24"><g fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="7" width="21" height="10" rx="1"/><path d="M25 10v4"/><rect x="4" y="9" width="14" height="6" fill="currentColor" stroke="none"/></g></symbol>
+</svg>
+
+<main id="s7-gm" class="screen" data-screen="S7" data-verb="接近">
+  <div class="scroll">
+    <section class="plate" data-el="plate">
+      <img data-el="img" src="" alt="">
+      <span class="vig" aria-hidden="true"></span>
+    </section>
+    <div class="mount" aria-hidden="true"></div>
+    <section class="title">
+      <h1 data-el="name">—</h1>
+      <p class="info" data-el="info"></p>
+    </section>
+    <section class="facts" data-el="facts"></section>
+    <section class="note" data-el="note">
+      <p>这件藏品的详细说明以馆方发布为准。此处展示名称、年代、类别与尺寸等基础信息。</p>
+    </section>
+    <div class="pad" aria-hidden="true"></div>
+  </div>
+
+  <div class="top" aria-hidden="true"></div>
+  <div class="controls">
+    <a class="icon-btn white" href="collection.html" aria-label="返回列表">
+      <svg aria-hidden="true"><use href="#ic-07"/></svg>
+    </a>
+    <button class="icon-btn white" type="button" aria-label="收藏这件" data-action="collect">
+      <svg aria-hidden="true"><use href="#ic-05"/></svg>
+    </button>
+  </div>
+
+  <div class="cta-wrap">
+    <a class="cta" href="ar.html">
+      <svg aria-hidden="true"><use href="#ic-04"/></svg>在馆里认出它
+    </a>
+  </div>
+</main>
+
+<script src="data/gm-collection.js"></script>
+<script>
+(function () {
+  const root = document.getElementById('s7-gm');
+  const p = new URLSearchParams(location.search);
+  const id = p.get('id');
+  const ALL = window.GM_COLLECTION || [];
+  const R = ALL.find(x => x.id === id) || ALL[0] || {};
+
+  const q = (s) => root.querySelector(s);
+
+  document.title = R.name ? R.name + ' · 导览' : '藏品详情';
+
+  const img = q('[data-el="img"]');
+  if (R.i) {
+    img.src = R.i;
+    img.alt = R.n || '';
+    img.onerror = () => { img.style.display = 'none'; q('[data-el="plate"]').classList.add('blank'); };
+  } else {
+    q('[data-el="plate"]').classList.add('blank');
+  }
+  q('[data-el="name"]').textContent = R.n || '—';
+
+  const infoBits = [R.d, R.c].filter(Boolean);
+  q('[data-el="info"]').innerHTML = infoBits.map(v => `<span>${v}</span>`).join('·');
+
+  // 事实表：只展示真实存在的字段
+  const facts = [];
+  if (R.c) facts.push(['类别', R.c]);
+  if (R.d) facts.push(['年代', R.d]);
+  if (R.m) facts.push(['质地', R.m]);
+  if (R.s) facts.push(['尺寸', R.s]);
+  if (R.id) facts.push(['馆藏编号', R.id]);
+  q('[data-el="facts"]').innerHTML = facts.map(([k, v]) =>
+    `<div class="fact"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('');
+
+  // 无额外说明时，淡化提示段
+  if (!R.note) q('[data-el="note"]').classList.add('muted');
+
+  const collect = q('[data-action="collect"]');
+  collect.addEventListener('click', () => {
+    const on = collect.getAttribute('aria-pressed') === 'true';
+    collect.setAttribute('aria-pressed', String(!on));
+    collect.style.color = on ? '' : 'var(--gold-500)';
+  });
+})();
+</script>
+</body>
+</html>

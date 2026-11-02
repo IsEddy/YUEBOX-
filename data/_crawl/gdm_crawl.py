@@ -129,10 +129,20 @@ def parse_items(html):
 
 
 def clean(s):
-    s = re.sub(r'<[^>]+>', '', s or '')
+    s = s or ''
+    # 先剥 HTML 注释（否则 "-->" 之后会混进 JS 源码）
+    s = re.sub(r'<!--.*?-->', ' ', s, flags=re.S)
+    s = re.sub(r'<script.*?</script>', ' ', s, flags=re.S)
+    s = re.sub(r'<style.*?</style>', ' ', s, flags=re.S)
+    s = re.sub(r'<[^>]+>', '', s)
     s = (s.replace('&nbsp;', ' ').replace('&amp;', '&').replace('&#39;', "'")
          .replace('&quot;', '"').replace('&lt;', '<').replace('&gt;', '>'))
-    return re.sub(r'\s+', ' ', s).strip()
+    s = re.sub(r'\s+', ' ', s).strip()
+    # 去掉残留的字段标签与注释尾巴，例如 "来源 --" / "--> var ..."
+    s = re.sub(r'\s*(名称|年代|类型|质地|尺寸|来源)\s*[：:].*$', '', s) if re.search(r'(名称|年代|类型|质地|尺寸|来源)\s*[：:]', s) else s
+    s = re.sub(r'\s*-{2,}\s*.*$', '', s)
+    s = re.sub(r'\s*var\s+[A-Za-z_].*$', '', s)
+    return s.strip()
 
 
 # ---------- 详情页 ----------

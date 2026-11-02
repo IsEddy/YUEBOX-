@@ -79,3 +79,7 @@ designs/
 
 # 解压后的模型体积过大（57MB），运行时由 .glb 转换，不入库
 04_四屏/model/vase_plain.glb
+
+# ---------- 抓取中间产物（原始 HTML 与缓存，可由脚本重跑）----------
+data/_crawl/
+data/_list_cache.json

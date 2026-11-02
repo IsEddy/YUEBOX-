@@ -88,3 +88,7 @@
 #s2-category .drawer-close:active{color:#fff}
 #s2-category .drawer-scrim{position:absolute;inset:0;background:rgba(20,17,15,.62);z-index:85;display:none}
 #s2-category .drawer-scrim.open{display:block}
+
+/* 全馆藏品入口 */
+#s2-category .all-link{position:absolute;right:24px;top:212px;display:inline-flex;align-items:center;gap:4px;font:var(--t-tag);color:var(--gold-500);z-index:20;min-height:32px;padding:0 4px}
+#s2-category .all-link svg{color:var(--gold-500);opacity:.8}

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=375, initial-scale=1">
+<meta name="dsh-design" content="app 375x812">
+<title>06 · 全馆藏品 · 导览</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="motion.css">
+<link rel="stylesheet" href="s6.css">
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <symbol id="ic-01" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M12 5 19 9 12 13 5 9Z"/><path d="M5 9 12 13 12 19 5 15Z"/><path d="M12 13 19 9 19 15 12 19Z"/><path d="M9 9 15 9"/></g></symbol>
+  <symbol id="ic-02" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="16" height="16"/><path d="M12 4v16M4 12h16"/><rect x="4" y="4" width="8" height="8" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-04" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><rect x="10" y="10" width="4" height="4"/></g></symbol>
+  <symbol id="ic-05" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="5" y="5" width="14" height="14"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-06" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="12" height="12"/><path d="m14 14 6 6"/></g></symbol>
+  <symbol id="ic-07" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M15 5 8 12l7 7"/></g></symbol>
+  <symbol id="ic-10" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M6 6l12 12M18 6 6 18"/></g></symbol>
+  <symbol id="ic-signal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M3 16v3M8 13v6M13 9v10M18 5v14"/></g></symbol>
+  <symbol id="ic-wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 9a15 15 0 0 1 18 0M6 12a10 10 0 0 1 12 0M9 15a6 6 0 0 1 6 0"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-battery" viewBox="0 0 28 24"><g fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="7" width="21" height="10" rx="1"/><path d="M25 10v4"/><rect x="4" y="9" width="14" height="6" fill="currentColor" stroke="none"/></g></symbol>
+</svg>
+
+<main id="s6-all" class="screen" data-screen="S6" data-verb="导览">
+  <header class="statusbar" aria-label="状态栏">
+    <span>9:41</span>
+    <span class="right">
+      <svg width="16" height="16" aria-hidden="true"><use href="#ic-signal"/></svg>
+      <svg width="16" height="16" aria-hidden="true"><use href="#ic-wifi"/></svg>
+      <svg width="22" height="16" aria-hidden="true"><use href="#ic-battery"/></svg>
+    </span>
+  </header>
+
+  <!-- 标题 -->
+  <div class="head enter" style="--i:0">
+    <span class="seq">06</span>
+    <h1>全馆藏品</h1>
+    <p class="sub"><b data-el="count">—</b> 件 · 按类目与年代翻</p>
+  </div>
+
+  <!-- 搜索 -->
+  <div class="search-row enter" style="--i:1">
+    <label class="search">
+      <svg aria-hidden="true"><use href="#ic-06"/></svg>
+      <input type="search" placeholder="搜藏品名、年代或类别" data-el="q" autocomplete="off">
+    </label>
+    <button class="filter-btn" type="button" aria-label="筛选" data-action="toggle-filter">
+      <svg width="18" height="18" aria-hidden="true"><use href="#ic-02"/></svg>
+    </button>
+  </div>
+
+  <!-- 筛选条 -->
+  <div class="filters" data-el="filters" hidden>
+    <div class="filter-group">
+      <span class="filter-label">类别</span>
+      <div class="chips" data-el="cat-chips"></div>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">年代</span>
+      <div class="chips" data-el="dyn-chips"></div>
+    </div>
+  </div>
+
+  <!-- 统计条 -->
+  <div class="summary" data-el="summary">
+    <span class="badge" data-el="active-filters">全部</span>
+    <span class="hit" data-el="hits">—</span>
+  </div>
+
+  <!-- 列表 -->
+  <section class="list-wrap">
+    <div class="relic-list" data-el="list" role="list"></div>
+  </section>
+
+  <!-- 空态 -->
+  <section class="empty" data-state="empty" hidden>
+    <svg width="32" height="32" aria-hidden="true"><use href="#ic-06"/></svg>
+    <h2>没找到对应的藏品</h2>
+    <p>换个关键词，或清空筛选条件</p>
+    <button class="secondary-btn" type="button" data-action="clear">清空筛选</button>
+  </section>
+
+  <!-- TabBar -->
+  <nav class="tabbar" aria-label="主导航">
+    <a href="splash.html"><svg aria-hidden="true"><use href="#ic-01"/></svg><span>宝盒</span></a>
+    <a href="category.html"><svg aria-hidden="true"><use href="#ic-02"/></svg><span>分格</span></a>
+    <a href="ar.html"><svg aria-hidden="true"><use href="#ic-04"/></svg><span>唤物</span></a>
+    <a href="category.html?drawer=1"><svg aria-hidden="true"><use href="#ic-05"/></svg><span>藏印</span></a>
+  </nav>
+  <div class="home-indicator" aria-hidden="true"></div>
+</main>
+
+<script src="data/gm-collection.js"></script>
+<script src="data/relics.js"></script>
+<script src="motion.js"></script>
+<script>
+(function () {
+  const root = document.getElementById('s6-all');
+  const q = (s) => root.querySelector(s);
+  const raw = window.GM_COLLECTION || [];
+
+  /* 清洗：剥掉站点模板尾巴 */
+  const strip = (v) => (v || '')
+    .replace(/来源.*$/,'').replace(/源$/, '').replace(/--.*$/,'')
+    .replace(/^\s*[:\s]+/,'').trim();
+
+  const ALL = raw.map(r => ({
+    id: r.id,
+    name: strip(r.n),
+    dynasty: strip(r.d),
+    category: strip(r.c).replace(/(书|画|绘)/g, m => m),
+    size: strip(r.s),
+    material: strip(r.m),
+    img: r.i || ''
+  })).filter(r => r.name);
+
+  q('[data-el="count"]').textContent = ALL.length.toLocaleString();
+  q('[data-el="hits"]').textContent = ALL.length.toLocaleString() + ' 件';
+
+  /* ---------- 类别与年代聚合 ---------- */
+  const catCount = {}, dynCount = {};
+  ALL.forEach(r => {
+    const c = r.category || '其他';
+    catCount[c] = (catCount[c] || 0) + 1;
+    const d = dynBucket(r.dynasty);
+    dynCount[d] = (dynCount[d] || 0) + 1;
+  });
+
+  function dynBucket(d) {
+    if (!d) return '待考';
+    if (/宋|辽|金|元/.test(d)) return '宋元';
+    if (/明/.test(d)) return '明';
+    if (/清/.test(d)) return '清';
+    if (/民国|现代|当代|[12][0-9]{3}/.test(d)) return '近现代';
+    return '待考';
+  }
+
+  const topCats = Object.entries(catCount).sort((a,b) => b[1]-a[1]).slice(0, 8);
+  const DYN_ORDER = ['宋元','明','清','近现代','待考'];
+
+  q('[data-el="cat-chips"]').innerHTML = topCats.map(([c,n]) =>
+    `<button class="chip" type="button" data-cat="${c}">${c}<i>${n}</i></button>`).join('');
+  q('[data-el="dyn-chips"]').innerHTML = DYN_ORDER.filter(d => dynCount[d]).map(d =>
+    `<button class="chip" type="button" data-dyn="${d}">${d}<i>${dynCount[d]}</i></button>`).join('');
+
+  /* ---------- 状态 ---------- */
+  let state = { kw: '', cat: null, dyn: null, page: 1 };
+  const PAGE = 24;
+
+  function match(r) {
+    if (state.cat && (r.category || '其他') !== state.cat) return false;
+    if (state.dyn && dynBucket(r.dynasty) !== state.dyn) return false;
+    if (state.kw) {
+      const k = state.kw.toLowerCase();
+      const hay = (r.name + r.dynasty + r.category + r.material).toLowerCase();
+      if (!hay.includes(k)) return false;
+    }
+    return true;
+  }
+
+  function render() {
+    const hits = ALL.filter(match);
+    q('[data-el="hits"]').textContent = hits.length.toLocaleString() + ' 件';
+
+    const badges = [state.cat, state.dyn].filter(Boolean);
+    q('[data-el="active-filters"]').textContent = badges.length ? badges.join(' · ') : '全部';
+
+    const shown = hits.slice(0, state.page * PAGE);
+    q('[data-el="list"]').innerHTML = shown.map((r, i) => `
+      <a class="row" role="listitem" href="detail-gm.html?id=${r.id}" data-id="${r.id}">
+        <span class="thumb">${r.img
+          ? `<img src="${r.img}" alt="${r.name}" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('blank')">`
+          : `<span class="noimg"></span>`}</span>
+        <span class="body">
+          <span class="name">${r.name}</span>
+          <span class="meta">${[r.dynasty, r.category].filter(Boolean).join(' · ')}</span>
+          ${r.size || r.material ? `<span class="spec">${[r.material, r.size].filter(Boolean).join(' · ')}</span>` : ''}
+        </span>
+        <span class="chev" aria-hidden="true">›</span>
+      </a>`).join('');
+
+    q('[data-state="empty"]').hidden = hits.length > 0;
+    q('.relic-list').hidden = hits.length === 0;
+
+    // 还有更多？
+    let more = root.querySelector('[data-el="more"]');
+    if (hits.length > shown.length) {
+      if (!more) {
+        more = document.createElement('button');
+        more.className = 'load-more secondary-btn';
+        more.dataset.el = 'more';
+        more.type = 'button';
+        more.textContent = `继续加载（还有 ${(hits.length - shown.length).toLocaleString()} 件）`;
+        more.addEventListener('click', () => { state.page++; render(); });
+        q('.list-wrap').appendChild(more);
+      }
+      more.textContent = `继续加载（还有 ${(hits.length - shown.length).toLocaleString()} 件）`;
+      more.hidden = false;
+    } else if (more) {
+      more.hidden = true;
+    }
+  }
+
+  /* ---------- 交互 ---------- */
+  q('[data-el="q"]').addEventListener('input', (e) => {
+    state.kw = e.target.value.trim();
+    state.page = 1;
+    render();
+  });
+
+  q('[data-action="toggle-filter"]').addEventListener('click', () => {
+    const f = q('[data-el="filters"]');
+    f.hidden = !f.hidden;
+    root.classList.toggle('filters-open', !f.hidden);
+    root.querySelector('[data-action="toggle-filter"]').setAttribute('aria-pressed', String(!f.hidden));
+  });
+
+  root.addEventListener('click', (e) => {
+    const chip = e.target.closest('[data-cat],[data-dyn]');
+    if (chip) {
+      if (chip.dataset.cat) {
+        state.cat = state.cat === chip.dataset.cat ? null : chip.dataset.cat;
+        root.querySelectorAll('[data-cat]').forEach(c =>
+          c.classList.toggle('on', c.dataset.cat === state.cat));
+        root.querySelectorAll('[data-dyn]').forEach(c => c.classList.remove('on'));
+        state.dyn = null;
+      } else {
+        state.dyn = state.dyn === chip.dataset.dyn ? null : chip.dataset.dyn;
+        root.querySelectorAll('[data-dyn]').forEach(c =>
+          c.classList.toggle('on', c.dataset.dyn === state.dyn));
+        root.querySelectorAll('[data-cat]').forEach(c => c.classList.remove('on'));
+        state.cat = null;
+      }
+      state.page = 1;
+      render();
+      return;
+    }
+    if (e.target.closest('[data-action="clear"]')) {
+      state = { kw: '', cat: null, dyn: null, page: 1 };
+      q('[data-el="q"]').value = '';
+      root.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+      render();
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
