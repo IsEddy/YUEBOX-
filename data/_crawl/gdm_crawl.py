@@ -57,14 +57,14 @@ def fetch(url):
     for attempt in range(MAX_TRY):
         polite()
         try:
-            r = requests.get(url, headers=HDRS, timeout=25)
+            r = requests.get(url, headers=HDRS, timeout=(5, 12))
             if r.status_code == 200:
                 return _decode(r)
             if r.status_code == 404:
                 return None
         except Exception:
             pass
-        time.sleep(1.5 + attempt)
+        time.sleep(0.8 + attempt * 1.2)
     return None
 
 
@@ -336,6 +336,12 @@ def main():
     limit = int(sys.argv[2]) if len(sys.argv) > 2 else None
     workers = int(sys.argv[3]) if len(sys.argv) > 3 else 4
     t0 = time.time()
+    if mode == 'detail':
+        # 只跑详情：读已缓存列表页 -> 抓详情 -> 合并
+        relics, _ = __import__('build').load_lists()
+        det = crawl_details([r['id'] for r in relics], workers)
+        print(f'[detail] 完成 {len(det)} / 目标 {len(relics)}', flush=True)
+        return
     if mode in ('all', 'list'):
         relics = crawl_lists('col49', limit)
         det = crawl_details([r['id'] for r in relics], workers)

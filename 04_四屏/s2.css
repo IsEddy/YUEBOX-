@@ -26,6 +26,7 @@
 
 /* ---------- 馆藏精选 ---------- */
 #s2-category .s2-picks{position:absolute;left:0;top:256px;width:100%;height:96px;z-index:12}
+#s2-category .s2-picks .rail-note{text-align:right}
 #s2-category .s2-picks .rail-note{position:absolute;right:24px;top:-18px;font:var(--t-tag);color:var(--gold-500)}
 #s2-category .s2-picks .rail{display:flex;gap:8px;padding:0 24px;overflow-x:auto;scrollbar-width:none;height:80px}
 #s2-category .s2-picks .rail::-webkit-scrollbar{display:none}
@@ -90,5 +91,5 @@
 #s2-category .drawer-scrim.open{display:block}
 
 /* 全馆藏品入口 */
-#s2-category .all-link{position:absolute;right:24px;top:212px;display:inline-flex;align-items:center;gap:4px;font:var(--t-tag);color:var(--gold-500);z-index:20;min-height:32px;padding:0 4px}
+#s2-category .all-link{position:absolute;left:24px;top:-20px;font:var(--t-tag);color:var(--gold-500);z-index:20;min-height:20px;display:inline-block}
 #s2-category .all-link svg{color:var(--gold-500);opacity:.8}
