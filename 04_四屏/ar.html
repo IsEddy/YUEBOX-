@@ -17,7 +17,7 @@
     <span class="s4-vig"></span>
   </section>
 
-  <header class="layer s4-head" data-layer="20_顶部" style="background:none">
+  <header class="layer s4-head" data-layer="20_顶部">
     <span class="seq">04</span>
     <h1>唤物</h1>
     <p>把镜头对准展签<br>或试着唤出下面这几件</p>
@@ -30,22 +30,25 @@
     </div>
   </section>
 
-  <section class="layer s4-examples" data-layer="40_示例区">
-    <div class="row">
-      <button type="button" data-example="molong"><span class="thumb"><img src="img/c1_molong.jpg" alt="墨龙图"></span><span>墨龙图</span></button>
-      <button type="button" data-example="shenkan"><span class="thumb"><img src="img/c2_shenkan.jpg" alt="大神龛"></span><span>大神龛</span></button>
-      <button type="button" data-example="fan"><span class="thumb"><img src="img/c8_fan.jpg" alt="外销扇"></span><span>外销扇</span></button>
-    </div>
-  </section>
+  <!-- 底部控件组：结果出现时整体收起 -->
+  <div class="s4-bottom" data-layer="40_底部控件">
+    <section class="layer s4-examples">
+      <div class="row">
+        <button type="button" data-example="molong"><span class="thumb"><img src="img/c1_molong.jpg" alt="墨龙图"></span><span>墨龙图</span></button>
+        <button type="button" data-example="shenkan"><span class="thumb"><img src="img/c2_shenkan.jpg" alt="大神龛"></span><span>大神龛</span></button>
+        <button type="button" data-example="fan"><span class="thumb"><img src="img/c8_fan.jpg" alt="外销扇"></span><span>外销扇</span></button>
+      </div>
+    </section>
 
-  <section class="layer s4-status" data-layer="50_状态文案">
-    <p data-status>对准展签或文物</p>
-  </section>
+    <section class="layer s4-status">
+      <p data-status>对准展签或文物</p>
+    </section>
 
-  <section class="layer s4-actions" data-layer="60_主次按钮">
-    <button class="primary-btn" type="button" data-action="scan">开始识别</button>
-    <button class="secondary-btn" type="button" data-action="demo">没有实物？试试示例</button>
-  </section>
+    <section class="layer s4-actions">
+      <button class="primary-btn" type="button" data-action="scan">开始识别</button>
+      <button class="secondary-btn" type="button" data-action="demo">没有实物？试试示例</button>
+    </section>
+  </div>
 
   <div class="layer s4-particles" data-layer="65_粒子" aria-hidden="true">
     <i style="left:60px;top:300px"></i><i style="left:96px;top:286px"></i><i style="left:132px;top:304px"></i><i style="left:168px;top:288px"></i>
@@ -94,7 +97,9 @@ const fail = root.querySelector('[data-fail]');
 const noperm = root.querySelector('[data-noperm]');
 
 function setStatus(t) { status.textContent = t; }
+
 function reset() {
+  root.classList.remove('showing-result');
   result.classList.remove('on');
   fail.hidden = true;
   particles.classList.remove('go');
@@ -102,12 +107,18 @@ function reset() {
   frame.style.opacity = '1';
   setStatus('对准展签或文物');
 }
+
 function succeed() {
   setStatus('它出来了。');
   frame.style.transform = 'scale(1)';
   particles.classList.add('go');
-  setTimeout(() => { result.classList.add('on'); frame.style.opacity = '0'; }, 240);
+  setTimeout(() => {
+    result.classList.add('on');
+    root.classList.add('showing-result');   // 收起底部控件
+    frame.style.opacity = '0';
+  }, 240);
 }
+
 function scanning() {
   setStatus('正在唤醒它…');
   frame.style.transform = 'scale(1.06)';
@@ -115,9 +126,14 @@ function scanning() {
   setTimeout(succeed, 1200);
 }
 
-if (p.get('state') === 'noperm') noperm.hidden = false;
-if (p.get('state') === 'success') setTimeout(succeed, 300);
-if (p.get('state') === 'fail') setTimeout(() => { fail.hidden = false; setStatus('这件宝贝还在盒子里睡觉，换一件试试？'); }, 300);
+if (p.get('state') === 'noperm') { noperm.hidden = false; }
+if (p.get('state') === 'success') { setTimeout(succeed, 300); }
+if (p.get('state') === 'fail') {
+  setTimeout(() => {
+    fail.hidden = false;
+    setStatus('这件宝贝还在盒子里睡觉，换一件试试？');
+  }, 300);
+}
 
 root.addEventListener('click', (e) => {
   const t = e.target.closest('[data-action],[data-example]');

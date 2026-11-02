@@ -1,5 +1,5 @@
 /* YUEBOX · 屏 2 分类页 · 分格 */
-#s2-category .s2-head{position:absolute;left:0;top:60px;width:100%;height:64px;z-index:20}
+#s2-category .s2-head{position:absolute;left:0;top:60px;width:100%;height:64px;z-index:20;pointer-events:none}
 #s2-category .s2-head .seq{position:absolute;left:24px;top:0;font:var(--t-num);letter-spacing:.06em;color:var(--gold-500);line-height:16px}
 #s2-category .s2-head h1{position:absolute;left:24px;top:20px;margin:0;font:var(--t-h1);letter-spacing:.02em;color:var(--silk-200)}
 #s2-category .s2-search-btn{position:absolute;right:12px;top:12px}
@@ -19,7 +19,7 @@
 #s2-category .pick .meta b{font:600 14px/20px YBX-Serif,serif;color:var(--silk-200)}
 #s2-category .pick .meta span{font:var(--t-tag);color:var(--gold-500);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #s2-category .s2-picks .rail-note{position:absolute;right:24px;top:-18px;font:var(--t-tag);color:var(--gold-500)}
-#s2-category .s2-grid{position:absolute;left:0;top:354px;bottom:90px;width:100%;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;z-index:8;contain:paint}
+#s2-category .s2-grid{position:absolute;left:0;top:354px;bottom:90px;width:100%;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;z-index:8;-webkit-mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 40px),transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 40px),transparent 100%)}
 #s2-category .s2-grid::-webkit-scrollbar{display:none}
 #s2-category .grid{display:grid;grid-template-columns:159px 159px;column-gap:9px;row-gap:16px;padding:0 24px 32px}
 #s2-category .gcard{position:relative;height:200px;background:var(--ink-700);border-radius:var(--r-box);overflow:hidden;display:flex;flex-direction:column}
@@ -44,13 +44,21 @@
 #s2-category .s2-empty .recs{display:flex;gap:9px;justify-content:center}
 #s2-category .s2-empty .recs a{width:72px;height:72px;border-radius:var(--r-box);overflow:hidden;background:var(--ink-700);border:1px solid var(--ink-500)}
 #s2-category .s2-empty .recs img{width:100%;height:100%;object-fit:cover}
-/* 藏印抽屉：固定高度 316，内容按 316 排版，不溢出 */
-#s2-category .s2-drawer{position:absolute;left:0;right:0;bottom:0;height:316px;background:var(--ink-700);border-top:1px solid var(--gold-500);z-index:90;border-radius:var(--r-box) var(--r-box) 0 0;display:none;flex-direction:column;align-items:center;padding:10px 24px 24px}
+/* 藏印抽屉：底部止于 TabBar 上沿(722)，高度 300，内容紧凑无空洞 */
+#s2-category .s2-drawer{position:absolute;left:0;right:0;bottom:90px;height:300px;background:var(--ink-700);border-top:1px solid var(--gold-500);z-index:90;border-radius:var(--r-box) var(--r-box) 0 0;display:none;flex-direction:column;padding:10px 24px 16px}
 #s2-category .s2-drawer.open{display:flex}
-#s2-category .s2-drawer .handle{width:36px;height:3px;background:var(--ink-500);border-radius:2px;flex:0 0 auto}
-#s2-category .s2-drawer h2{margin:12px 0 4px;font:var(--t-h2);color:var(--silk-200);flex:0 0 auto;width:100%;text-align:center}
-#s2-category .s2-drawer p{margin:0 0 12px;font:var(--t-cap);color:var(--white-60);flex:0 0 auto;width:100%;text-align:center;white-space:normal}
-#s2-category .s2-drawer .seal{width:80px;height:80px;border:1.5px solid var(--gold-500);display:grid;place-items:center;border-radius:var(--r-box);flex:0 0 auto;margin-bottom:14px}
+#s2-category .s2-drawer .handle{width:36px;height:3px;background:var(--ink-500);border-radius:2px;flex:0 0 auto;margin:0 auto}
+#s2-category .s2-drawer h2{margin:14px 0 6px;font:var(--t-h2);color:var(--silk-200);flex:0 0 auto;width:100%;text-align:center}
+#s2-category .s2-drawer p{margin:0 0 16px;font:var(--t-cap);color:var(--white-60);flex:0 0 auto;width:100%;text-align:center}
+#s2-category .s2-drawer .seal{width:88px;height:88px;border:1.5px solid var(--gold-500);display:grid;place-items:center;border-radius:var(--r-box);flex:0 0 auto;margin:0 auto 18px}
 #s2-category .s2-drawer .seal i{width:14px;height:14px;background:var(--red-600);border-radius:50%}
 #s2-category .s2-drawer .acts{display:flex;gap:9px;width:100%;flex:0 0 auto;margin-top:auto}
 #s2-category .s2-drawer .acts .primary-btn,#s2-category .s2-drawer .acts .secondary-btn{flex:1;min-width:0;height:44px;padding:0 8px;font:var(--t-cap)}
+
+/* 抽屉关闭按钮 */
+#s2-category .s2-drawer .drawer-close{position:absolute;right:12px;top:12px;width:44px;height:44px;display:grid;place-items:center;background:transparent;border:0;color:var(--white-60);border-radius:var(--r-box)}
+#s2-category .s2-drawer .drawer-close:focus-visible{outline:2px solid var(--gold-500);outline-offset:2px}
+#s2-category .s2-drawer .drawer-close svg{width:20px;height:20px}
+/* 遮罩：抽屉打开时压暗上方内容，点击关闭 */
+#s2-category .drawer-scrim{position:absolute;inset:0;background:rgba(20,17,15,.62);z-index:85;opacity:0;pointer-events:none;transition:opacity var(--d-base) var(--ease-base)}
+#s2-category.drawer-open .drawer-scrim{opacity:1;pointer-events:auto}

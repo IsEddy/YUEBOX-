@@ -77,10 +77,22 @@ const cards = [...root.querySelectorAll('[data-hotspot-card]')];
 root.querySelectorAll('[data-hotspot]').forEach(btn => {
   btn.addEventListener('click', () => {
     const id = btn.dataset.hotspot;
-    cards.forEach(c => c.classList.toggle('on', c.dataset.hotspotCard === id));
-    const r = btn.getBoundingClientRect();
     const card = root.querySelector(`[data-hotspot-card="${id}"]`);
-    card.style.top = (r.top + window.scrollY + 20) + 'px';
+    const isOpen = card.classList.contains('on');
+    cards.forEach(c => c.classList.remove('on'));
+    if (isOpen) return;
+    card.classList.add('on');
+    // 定位到热点正下方，并限制在可视区域内
+    const r = btn.getBoundingClientRect();
+    const cw = 280;
+    const ch = card.offsetHeight || 120;
+    let left = r.left + r.width / 2 - cw / 2;
+    left = Math.max(12, Math.min(left, 375 - cw - 12));
+    let top = r.top + r.height + 10;
+    if (top + ch > 700) top = Math.max(100, r.top - ch - 10);   // 下方放不下就放上方
+    card.style.left = left + 'px';
+    card.style.top = top + 'px';
+    card.style.transform = 'none';
   });
 });
 root.addEventListener('click', (e) => {

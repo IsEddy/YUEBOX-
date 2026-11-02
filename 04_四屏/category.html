@@ -112,6 +112,9 @@
   </section>
 
   <section class="s2-drawer" data-layer="70_浮层" data-drawer="cangyin" aria-label="藏印抽屉" aria-hidden="true">
+    <button class="drawer-close" type="button" data-action="close-drawer" aria-label="关闭藏印">
+      <svg width="20" height="20" aria-hidden="true"><use href="#ic-10"/></svg>
+    </button>
     <div class="handle" aria-hidden="true"></div>
     <h2>藏印</h2>
     <p>把喜欢的宝贝，收进你的印盒。</p>
@@ -121,7 +124,7 @@
       <button class="secondary-btn" type="button" data-action="share"><svg width="16" height="16" aria-hidden="true"><use href="#ic-08"/></svg>分享卡片</button>
     </div>
   </section>
-  <div class="layer" data-drawer-scrim hidden style="background:rgba(20,17,15,.55);z-index:80" data-action="close-drawer"></div>
+  <div class="drawer-scrim" data-action="close-drawer" aria-hidden="true"></div>
 </main>
 <script>
 const root = document.getElementById('s2-category');
@@ -134,11 +137,11 @@ if (view === 'axis') {
 }
 if (p.get('state') === 'empty') root.querySelector('[data-state="empty"]').hidden = false;
 const drawer = root.querySelector('[data-drawer="cangyin"]');
-const scrim = root.querySelector('[data-drawer-scrim]');
+
 function openDrawer(open) {
   drawer.classList.toggle('open', open);
+  root.classList.toggle('drawer-open', open);
   drawer.setAttribute('aria-hidden', String(!open));
-  scrim.hidden = !open;
 }
 if (p.get('drawer') === '1') openDrawer(true);
 root.addEventListener('click', (e) => {
