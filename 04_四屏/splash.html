@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=375, initial-scale=1">
+<meta name="dsh-design" content="app 375x812">
+<title>01 · 启动页 · 推开</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<!--#include file="icons.svg"-->
+<main id="s1-splash" class="screen" data-screen="S1" data-verb="推开">
+  <section class="layer s1-bg" data-layer="00_底色">
+    <header class="statusbar" aria-label="状态栏"><span>9:41</span><span class="right"><svg width="16" height="16" aria-hidden="true"><use href="#ic-signal"/></svg><svg width="16" height="16" aria-hidden="true"><use href="#ic-wifi"/></svg><svg width="22" height="16" aria-hidden="true"><use href="#ic-battery"/></svg></span></header>
+    <a class="s1-skip" href="category.html">跳过</a>
+    <span class="corner-seq s1-seq">01</span>
+  </section>
+  <section class="layer s1-hero" data-layer="20_内容层">
+    <div class="s1-halo" aria-hidden="true"></div>
+    <div class="s1-seam" aria-hidden="true"></div>
+    <div class="s1-lid-top" aria-hidden="true"></div>
+    <div class="s1-lid-bottom" aria-hidden="true"></div>
+    <div class="s1-vermilion" aria-hidden="true"></div>
+  </section>
+  <section class="layer" data-layer="30_品牌区" style="pointer-events:none">
+    <div class="s1-brand">
+      <h1 aria-label="粤博·宝盒"><span>粤</span><span>博</span><span>·</span><span>宝</span><span>盒</span></h1>
+      <p>广东省博物馆数字导览</p>
+    </div>
+    <p class="s1-quote">轻推，宝盒开了。</p>
+    <div class="s1-progress" aria-label="启动进度">
+      <div class="track"><div class="fill"></div></div>
+      <div class="s1-version">YUEBOX · 数字宝盒</div>
+    </div>
+  </section>
+  <section class="layer s1-state" data-layer="50_状态层" data-state="loading" hidden>
+    <div class="state-inner">
+      <div class="state-ring" aria-hidden="true"></div>
+      <h2 class="state-title">正在开盒…</h2>
+      <p class="state-copy">把馆藏一件一件，放进你的口袋。</p>
+      <a class="primary-btn" href="category.html">进入宝盒</a>
+    </div>
+  </section>
+  <section class="layer s1-state" data-layer="50_状态层" data-state="error" hidden>
+    <div class="state-inner">
+      <svg width="32" height="32" style="margin:0 auto;color:var(--gold-500)" aria-hidden="true"><use href="#ic-01"/></svg>
+      <h2 class="state-title">盒子卡住了，轻触重试</h2>
+      <p class="state-copy">连接不太稳定，但宝贝都还在。</p>
+      <a class="retry" href="splash.html">重新推开</a>
+    </div>
+  </section>
+  <a class="layer" href="category.html" aria-label="进入文物分类页" style="z-index:5"></a>
+</main>
+<script>
+// 开盒后自动进入分类页；状态层用 data-state 切换，不生成第五屏。
+const s1 = document.getElementById('s1-splash');
+const params = new URLSearchParams(location.search);
+const state = params.get('state');
+if (state === 'loading' || state === 'error') {
+  s1.querySelector(`[data-state="${state}"]`).hidden = false;
+} else if (params.get('auto') !== '0') {
+  setTimeout(() => {
+    if (!document.hidden) location.href = 'category.html';
+  }, 1800);
+}
+</script>
+</body>
+</html>

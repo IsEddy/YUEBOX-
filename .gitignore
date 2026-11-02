@@ -68,3 +68,9 @@ images/逛彩龙纹双耳象瓶_上部特写.png
 .oil-ui/
 .curate-cache.json
 manifest.json
+
+# ---------- P4 字体副本（源字体在根目录，已被忽略；此处仅本地引用）----------
+04_四屏/fonts/
+
+# ---------- 其他会话的 claude-design 画布（非本项目四屏交付）----------
+designs/

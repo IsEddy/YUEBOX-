@@ -1,0 +1,40 @@
+/* YUEBOX · 屏 1 启动页 · 推开 */
+#s1-splash .s1-bg{background:var(--ink-900)}
+#s1-splash .s1-skip{position:absolute;right:12px;top:36px;display:grid;place-items:center;min-width:44px;min-height:44px;padding:0 12px;font:var(--t-cap);color:var(--white-60);background:transparent;border:0}
+#s1-splash .s1-skip:focus-visible{outline:2px solid var(--gold-500);outline-offset:2px}
+#s1-splash .s1-seq{left:24px;top:60px}
+#s1-splash .s1-hero{position:absolute;inset:60px 0 0}
+#s1-splash .s1-seam{position:absolute;left:50%;top:320px;width:200px;height:1px;background:var(--gold-500);transform:translateX(-50%) scaleX(0);transform-origin:center;animation:seam-open 900ms var(--ease-out) forwards;z-index:3}
+#s1-splash .s1-halo{position:absolute;left:50%;top:280px;width:240px;height:80px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(201,162,39,.20) 0%,rgba(201,162,39,0) 68%);opacity:0;animation:halo-in 900ms var(--ease-out) 300ms forwards;z-index:1}
+#s1-splash .s1-lid-top{position:absolute;left:0;top:60px;width:100%;height:260px;background:linear-gradient(180deg,rgba(20,17,15,0),rgba(20,17,15,.96));animation:lid-top 900ms var(--ease-out) 900ms forwards;z-index:2}
+#s1-splash .s1-lid-bottom{position:absolute;left:0;top:321px;width:100%;height:320px;background:linear-gradient(0deg,rgba(20,17,15,.96),rgba(20,17,15,0));animation:lid-bottom 900ms var(--ease-out) 900ms forwards;z-index:2}
+#s1-splash .s1-vermilion{position:absolute;left:0;top:340px;width:100%;height:250px;background:linear-gradient(0deg,rgba(180,54,43,.14),rgba(180,54,43,0));opacity:0;animation:vermilion-in 360ms var(--ease-base) 900ms forwards}
+#s1-splash .s1-brand{position:absolute;left:0;top:575px;width:100%;text-align:center;z-index:4}
+#s1-splash .s1-brand h1{font:var(--t-display);letter-spacing:.02em;color:var(--gold-500);margin:0;display:flex;justify-content:center;gap:.12em}
+#s1-splash .s1-brand h1 span{opacity:0;transform:translateY(12px);animation:char-in 240ms var(--ease-base) forwards}
+#s1-splash .s1-brand h1 span:nth-child(1){animation-delay:1200ms}
+#s1-splash .s1-brand h1 span:nth-child(2){animation-delay:1240ms}
+#s1-splash .s1-brand h1 span:nth-child(3){animation-delay:1280ms}
+#s1-splash .s1-brand h1 span:nth-child(4){animation-delay:1320ms}
+#s1-splash .s1-brand h1 span:nth-child(5){animation-delay:1360ms}
+#s1-splash .s1-brand p{font:var(--t-cap);color:var(--white-70);margin:8px 0 0;opacity:0;animation:fade-in 240ms var(--ease-base) 1400ms forwards}
+#s1-splash .s1-quote{position:absolute;left:0;top:650px;width:100%;text-align:center;font:var(--t-quote);color:var(--white-85);margin:0;opacity:0;animation:fade-in 240ms var(--ease-base) 1560ms forwards;z-index:4}
+#s1-splash .s1-progress{position:absolute;left:50%;top:730px;width:100px;transform:translateX(-50%);z-index:4}
+#s1-splash .s1-progress .track{height:1px;background:rgba(201,162,39,.28)}
+#s1-splash .s1-progress .fill{height:1px;background:var(--gold-500);width:0;animation:progress-in 1200ms var(--ease-out) forwards}
+#s1-splash .s1-version{font:var(--t-tag);color:var(--white-45);text-align:center;margin-top:15px}
+@keyframes seam-open{0%{transform:translateX(-50%) scaleX(0)}100%{transform:translateX(-50%) scaleX(1)}}
+@keyframes halo-in{to{opacity:1}}
+@keyframes lid-top{to{transform:translateY(-60px);opacity:0}}
+@keyframes lid-bottom{to{transform:translateY(60px);opacity:0}}
+@keyframes vermilion-in{to{opacity:1}}
+@keyframes char-in{to{opacity:1;transform:translateY(0)}}
+@keyframes fade-in{to{opacity:1}}
+@keyframes progress-in{to{width:100%}}
+#s1-splash .s1-state{display:grid;place-items:center;background:rgba(20,17,15,.97);z-index:80}
+#s1-splash .s1-state .state-inner{text-align:center;padding:24px}
+#s1-splash .s1-state .state-title{font:var(--t-h2);color:var(--silk-200);margin:16px 0 8px}
+#s1-splash .s1-state .state-copy{font:var(--t-body);color:var(--white-60);margin:0 0 22px}
+#s1-splash .s1-state .retry{border:1px solid var(--red-600);color:var(--red-500);background:transparent;padding:12px 24px;border-radius:var(--r-box);font:var(--t-sub);min-height:44px}
+#s1-splash .state-ring{width:24px;height:24px;border:1px solid var(--gold-500);border-radius:50%;margin:0 auto;animation:ring-breathe 2s ease-in-out infinite}
+@keyframes ring-breathe{0%,100%{opacity:.4;transform:scale(.92)}50%{opacity:1;transform:scale(1)}}

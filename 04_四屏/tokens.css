@@ -1,0 +1,86 @@
+/* YUEBOX · 设计变量（与 03_规范/tokens.json 同步）
+   单位：375×812 逻辑像素；色板来自 P3 实测。 */
+@font-face{font-family:YBX-Serif;src:url("fonts/SourceHanSerifSC-SemiBold.otf") format("opentype");font-weight:600;font-display:swap}
+@font-face{font-family:YBX-Serif;src:url("fonts/SourceHanSerifSC-Bold.otf") format("opentype");font-weight:700;font-display:swap}
+@font-face{font-family:YBX-Sans;src:url("fonts/SourceHanSans-Regular.otf") format("opentype");font-weight:400;font-display:swap}
+@font-face{font-family:YBX-Sans;src:url("fonts/SourceHanSans-Medium.otf") format("opentype");font-weight:500;font-display:swap}
+@font-face{font-family:YBX-Kai;src:url("fonts/LXGWWenKai-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:YBX-Inter;src:url("fonts/Inter.ttc") format("truetype");font-weight:500;font-display:swap}
+:root{
+  --ink-900:#14110F;--ink-700:#2A2622;--ink-500:#3A3530;
+  --red-600:#B4362B;--red-500:#D2553F;--red-800:#7E2118;
+  --gold-500:#C9A227;--gold-300:#E4C97E;--gold-700:#8A6C1C;--gold-800:#7D6018;
+  --silk-100:#FBF7EF;--silk-200:#F5EFE3;--silk-400:#E6DAC4;
+  --cobalt-600:#2B5C7E;--shiwang-600:#4E7A5E;--duan-600:#6B4C5A;--tongcao-400:#DDB877;
+  --success:#4E7A5E;--info:#C9A227;--warn:#C4553F;--error:#A63A2E;--disabled:#6E665C;
+  --white-45:rgba(255,255,255,.45);--white-50:rgba(255,255,255,.50);
+  --white-60:rgba(255,255,255,.60);--white-65:rgba(255,255,255,.65);
+  --white-70:rgba(255,255,255,.70);--white-85:rgba(255,255,255,.85);
+  --t-display:700 32px/42px YBX-Serif,serif;
+  --t-h1:700 26px/36px YBX-Serif,serif;
+  --t-h2:600 20px/28px YBX-Serif,serif;
+  --t-name:600 22px/30px YBX-Serif,serif;
+  --t-sub:500 16px/24px YBX-Sans,sans-serif;
+  --t-body:400 14px/22px YBX-Sans,sans-serif;
+  --t-cap:400 12px/18px YBX-Sans,sans-serif;
+  --t-tag:500 11px/16px YBX-Sans,sans-serif;
+  --t-num:500 12px/16px YBX-Inter,YBX-Sans,sans-serif;
+  --t-quote:400 15px/26px YBX-Kai,serif;
+  --r-box:2px;--r-card:4px;--r-pill:8px;--r-full:999px;
+  --stroke-gold:1px;
+  --shadow-1:0 2px 8px rgba(20,17,15,.12);
+  --shadow-2:0 8px 24px rgba(20,17,15,.20);
+  --d-micro:120ms;--d-fast:180ms;--d-base:240ms;--d-page:360ms;--d-ritual:1200ms;--d-draw:600ms;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-base:cubic-bezier(.22,.61,.36,1);
+  --ease-micro:cubic-bezier(.3,0,.2,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--ink-900);font:var(--t-body);color:var(--silk-200);-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+svg{display:block;flex-shrink:0}
+img{display:block;max-width:100%}
+[hidden]{display:none!important}
+.screen{position:relative;width:375px;height:812px;overflow:hidden;background:var(--ink-900)}
+.screen.light{background:var(--silk-200);color:var(--ink-700)}
+.layer{position:absolute;inset:0}
+.layer > .scroll{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
+.layer > .scroll::-webkit-scrollbar{display:none}
+.statusbar{position:absolute;left:0;top:0;width:100%;height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:500 12px/16px YBX-Inter,sans-serif;letter-spacing:.02em;z-index:50}
+.statusbar .right{display:flex;align-items:center;gap:4px;font-size:11px;letter-spacing:.12em}
+.corner-seq{position:absolute;left:24px;top:48px;font:var(--t-num);letter-spacing:.06em;color:var(--gold-500);z-index:10}
+.page-title{position:absolute;left:24px;top:60px;font:var(--t-h1);letter-spacing:.02em;margin:0}
+.icon-btn{display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;background:transparent;border-radius:var(--r-box)}
+.icon-btn:focus-visible{outline:2px solid var(--gold-500);outline-offset:2px}
+.icon-btn svg{width:24px;height:24px}
+.icon-btn.white svg{color:#fff}
+.primary-btn{display:flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:var(--r-box);background:var(--red-600);color:#fff;font:var(--t-sub);min-height:44px;padding:12px 20px;box-shadow:var(--shadow-1)}
+.primary-btn svg{width:22px;height:22px}
+.primary-btn:active{transform:scale(.98);background:var(--red-500)}
+.secondary-btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:1px solid var(--gold-500);background:transparent;color:var(--gold-500);font:var(--t-cap);border-radius:var(--r-box);padding:10px 16px}
+.card{background:var(--ink-700);border-radius:var(--r-box)}
+.gold-line{height:1px;background:var(--gold-500)}
+.num{font:var(--t-num);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.cap{font:var(--t-cap)}
+.tag{font:var(--t-tag)}
+.muted-dark{color:var(--white-45)}
+.muted-dark-60{color:var(--white-60)}
+.serif{font-family:YBX-Serif,serif}
+.kai{font-family:YBX-Kai,serif}
+.tabbar{position:absolute;left:0;bottom:34px;width:100%;height:56px;background:var(--ink-900);border-top:1px solid var(--ink-500);display:grid;grid-template-columns:repeat(4,1fr);z-index:60;isolation:isolate}
+.tabbar::before{content:"";position:absolute;left:0;right:0;top:-28px;height:28px;background:linear-gradient(180deg,rgba(20,17,15,0),var(--ink-900));z-index:-1;pointer-events:none}
+.tabbar a{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:var(--t-tag);color:var(--white-45);height:56px;line-height:16px}
+.tabbar a svg{width:22px;height:22px}
+.tabbar a[aria-current="page"]{color:var(--gold-500)}
+.tabbar a[aria-current="page"]::before{content:"";position:absolute;top:-1px;left:calc(50% - 14px);width:28px;height:2px;background:var(--gold-500)}
+.home-indicator{position:absolute;left:0;bottom:0;width:100%;height:34px;display:flex;align-items:center;justify-content:center;z-index:60}
+.home-indicator::after{content:"";width:134px;height:5px;border-radius:3px;background:rgba(255,255,255,.85)}
+.light .home-indicator::after{background:rgba(20,17,15,.85)}
+.reveal{animation:rise var(--d-base) var(--ease-base) both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}

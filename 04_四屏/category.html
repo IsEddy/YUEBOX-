@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=375, initial-scale=1">
+<meta name="dsh-design" content="app 375x812">
+<title>02 · 文物分类页 · 分格</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="s2.css">
+</head>
+<body>
+<main id="s2-category" class="screen" data-screen="S2" data-verb="分格">
+  <section class="layer" data-layer="00_底色" style="background:var(--ink-900)">
+    <header class="statusbar" aria-label="状态栏"><span>9:41</span><span class="right"><svg width="16" height="16" aria-hidden="true"><use href="#ic-signal"/></svg><svg width="16" height="16" aria-hidden="true"><use href="#ic-wifi"/></svg><svg width="22" height="16" aria-hidden="true"><use href="#ic-battery"/></svg></span></header>
+  </section>
+
+  <section class="layer" data-layer="20_标题区">
+    <div class="s2-head">
+      <span class="seq">02</span>
+      <h1>分格</h1>
+    </div>
+    <button class="icon-btn white s2-search-btn" type="button" aria-label="搜索" data-action="search">
+      <svg aria-hidden="true"><use href="#ic-06"/></svg>
+    </button>
+    <button class="s2-search" type="button" data-action="search" aria-label="搜一件宝贝">
+      <svg aria-hidden="true"><use href="#ic-06"/></svg><span>搜一件宝贝</span>
+    </button>
+    <div class="s2-seg" role="tablist" aria-label="视图切换">
+      <a role="tab" aria-selected="true" href="category.html">格</a>
+      <a role="tab" aria-selected="false" href="category.html?view=axis">轴</a>
+    </div>
+    <span class="s2-seg-note">按工艺看，也按年代看</span>
+  </section>
+
+  <section class="layer s2-picks" data-layer="30_馆藏精选">
+    <span class="rail-note">约 8 分钟看完</span>
+    <div class="rail" role="list">
+      <a class="pick" role="listitem" href="detail.html">
+        <span class="thumb"><img src="img/c1_molong.jpg" alt="南宋陈容墨龙图轴"></span>
+        <span class="meta"><b>墨龙图</b><span>数字复现</span></span>
+      </a>
+      <a class="pick" role="listitem" href="detail.html">
+        <span class="thumb"><img src="img/c2_shenkan.jpg" alt="潮州金漆木雕大神龛"></span>
+        <span class="meta"><b>大神龛</b><span>金漆木雕</span></span>
+      </a>
+      <a class="pick" role="listitem" href="detail.html">
+        <span class="thumb"><img src="img/c3_houwangyan.png" alt="千金猴王砚"></span>
+        <span class="meta"><b>猴王砚</b><span>端石工艺</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="layer s2-grid" data-layer="40_主栅格" data-view="grid">
+    <div class="grid" role="list">
+      <a class="gcard" role="listitem" href="detail.html">
+        <span class="pic"><img src="img/c3_houwangyan.png" alt="端砚代表文物千金猴王砚"></span>
+        <span class="txt"><p class="name">端砚</p><p class="sub">端石工艺</p></span>
+        <span class="corner" aria-hidden="true"></span>
+      </a>
+      <a class="gcard" role="listitem" href="detail.html">
+        <span class="pic"><img src="img/c2_shenkan.jpg" alt="潮州木雕代表文物金漆木雕大神龛"></span>
+        <span class="txt"><p class="name">潮州木雕</p><p class="sub">金漆工艺</p></span>
+        <span class="corner" aria-hidden="true"></span>
+      </a>
+      <a class="gcard" role="listitem" href="detail.html">
+        <span class="pic"><img src="img/c9_guangcai.jpg" alt="广彩龙纹双象耳瓶"></span>
+        <span class="txt"><p class="name">历代陶瓷</p><p class="sub">广彩与窑口</p></span>
+        <span class="corner" aria-hidden="true"></span>
+      </a>
+      <a class="gcard" role="listitem" href="detail.html">
+        <span class="pic"><img src="img/c1_molong.jpg" alt="馆藏书画代表墨龙图"></span>
+        <span class="txt"><p class="name">馆藏书画</p><p class="sub">绢本墨笔</p></span>
+        <span class="corner" aria-hidden="true"></span>
+      </a>
+      <a class="gcard" role="listitem" href="detail.html">
+        <span class="pic"><img src="img/c8_fan.jpg" alt="省港澳港口风景图折扇"></span>
+        <span class="txt"><p class="name">广府工艺</p><p class="sub">织绣 · 外销</p></span>
+        <span class="corner" aria-hidden="true"></span>
+      </a>
+      <div class="gcard empty" aria-hidden="true"><span class="pic"></span></div>
+    </div>
+  </section>
+
+  <section class="layer s2-axis" data-layer="40_主栅格" data-view="axis" hidden>
+    <div class="axis-seg"><h3>唐宋元</h3><p>墨龙图（南宋）· 南海丝路</p></div>
+    <div class="axis-seg"><h3>明清</h3><p>大神龛（清）· 猴王砚（清光绪）· 广彩（清）</p></div>
+    <div class="axis-seg"><h3>近现代</h3><p>外销扇（19 世纪）· 金鸡报晓</p></div>
+  </section>
+
+  <section class="layer s2-empty" data-layer="50_状态层" data-state="empty" hidden>
+    <div class="inner">
+      <svg width="28" height="28" style="margin:0 auto;color:var(--gold-500)" aria-hidden="true"><use href="#ic-06"/></svg>
+      <h2>这一格还是空的</h2>
+      <p>换个词试试，或者从这三件开始</p>
+      <div class="recs">
+        <a href="detail.html"><img src="img/c1_molong.jpg" alt="墨龙图"></a>
+        <a href="detail.html"><img src="img/c2_shenkan.jpg" alt="大神龛"></a>
+        <a href="detail.html"><img src="img/c3_houwangyan.png" alt="猴王砚"></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="layer" data-layer="60_TabBar">
+    <nav class="tabbar s2-tabs" aria-label="主导航">
+      <a href="splash.html"><svg aria-hidden="true"><use href="#ic-01"/></svg><span>宝盒</span></a>
+      <a href="category.html" aria-current="page"><svg aria-hidden="true"><use href="#ic-02"/></svg><span>分格</span></a>
+      <a href="ar.html"><svg aria-hidden="true"><use href="#ic-04"/></svg><span>唤物</span></a>
+      <a href="category.html?drawer=1"><svg aria-hidden="true"><use href="#ic-05"/></svg><span>藏印</span></a>
+    </nav>
+    <div class="home-indicator" aria-hidden="true"></div>
+  </section>
+
+  <section class="s2-drawer" data-layer="70_浮层" data-drawer="cangyin" aria-label="藏印抽屉" aria-hidden="true">
+    <div class="handle" aria-hidden="true"></div>
+    <h2>藏印</h2>
+    <p>把喜欢的宝贝，收进你的印盒。</p>
+    <div class="seal" aria-hidden="true"><i></i></div>
+    <div class="acts">
+      <button class="primary-btn" type="button" data-action="seal">盖一枚印</button>
+      <button class="secondary-btn" type="button" data-action="share"><svg width="16" height="16" aria-hidden="true"><use href="#ic-08"/></svg>分享卡片</button>
+    </div>
+  </section>
+  <div class="layer" data-drawer-scrim hidden style="background:rgba(20,17,15,.55);z-index:80" data-action="close-drawer"></div>
+</main>
+<script>
+const root = document.getElementById('s2-category');
+const p = new URLSearchParams(location.search);
+const view = p.get('view');
+if (view === 'axis') {
+  root.querySelector('[data-view="grid"]').hidden = true;
+  root.querySelector('[data-view="axis"]').hidden = false;
+  root.querySelectorAll('.s2-seg a').forEach(a => a.setAttribute('aria-selected', a.getAttribute('href').includes('axis') ? 'true' : 'false'));
+}
+if (p.get('state') === 'empty') root.querySelector('[data-state="empty"]').hidden = false;
+const drawer = root.querySelector('[data-drawer="cangyin"]');
+const scrim = root.querySelector('[data-drawer-scrim]');
+function openDrawer(open) {
+  drawer.classList.toggle('open', open);
+  drawer.setAttribute('aria-hidden', String(!open));
+  scrim.hidden = !open;
+}
+if (p.get('drawer') === '1') openDrawer(true);
+root.addEventListener('click', (e) => {
+  const t = e.target.closest('[data-action]');
+  if (!t) return;
+  const a = t.dataset.action;
+  if (a === 'search') { location.href = 'category.html?state=empty'; }
+  if (a === 'close-drawer') { history.replaceState(null, '', 'category.html'); openDrawer(false); }
+  if (a === 'seal') { t.textContent = '已收进印盒'; t.disabled = true; }
+});
+</script>
+</body>
+</html>

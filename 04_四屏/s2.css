@@ -1,0 +1,56 @@
+/* YUEBOX · 屏 2 分类页 · 分格 */
+#s2-category .s2-head{position:absolute;left:0;top:60px;width:100%;height:64px;z-index:20}
+#s2-category .s2-head .seq{position:absolute;left:24px;top:0;font:var(--t-num);letter-spacing:.06em;color:var(--gold-500);line-height:16px}
+#s2-category .s2-head h1{position:absolute;left:24px;top:20px;margin:0;font:var(--t-h1);letter-spacing:.02em;color:var(--silk-200)}
+#s2-category .s2-search-btn{position:absolute;right:12px;top:12px}
+#s2-category .s2-search{position:absolute;left:24px;top:130px;width:327px;min-height:44px;display:flex;align-items:center;gap:8px;padding:0 12px;background:transparent;border:1px solid var(--gold-500);border-radius:var(--r-box);color:var(--white-50);font:var(--t-cap);text-align:left}
+#s2-category .s2-search svg{width:16px;height:16px;color:var(--gold-500)}
+#s2-category .s2-seg{position:absolute;left:24px;top:186px;width:140px;height:48px;display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--gold-500);border-radius:var(--r-pill);overflow:hidden;padding:2px;gap:2px;background:transparent}
+#s2-category .s2-seg a{display:grid;place-items:center;font:var(--t-cap);color:var(--gold-500);border-radius:6px;min-height:44px;min-width:44px;height:44px}
+#s2-category .s2-seg a[aria-selected="true"]{background:var(--red-600);color:#fff}
+#s2-category .s2-seg-note{position:absolute;left:176px;top:200px;font:var(--t-tag);color:var(--white-45)}
+#s2-category .s2-picks{position:absolute;left:0;top:246px;width:100%;height:96px;z-index:12}
+#s2-category .s2-picks .rail{display:flex;gap:9px;padding:0 24px;overflow-x:auto;scrollbar-width:none;height:80px;align-items:stretch}
+#s2-category .s2-picks .rail::-webkit-scrollbar{display:none}
+#s2-category .pick{flex:0 0 150px;height:68px;display:flex;gap:8px;padding:8px;background:var(--ink-700);border-radius:var(--r-box);border:1px solid var(--ink-500)}
+#s2-category .pick .thumb{width:52px;height:52px;flex:0 0 52px;background:var(--ink-500);border-radius:var(--r-box);overflow:hidden}
+#s2-category .pick .thumb img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+#s2-category .pick .meta{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:2px}
+#s2-category .pick .meta b{font:600 14px/20px YBX-Serif,serif;color:var(--silk-200)}
+#s2-category .pick .meta span{font:var(--t-tag);color:var(--gold-500);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#s2-category .s2-picks .rail-note{position:absolute;right:24px;top:-18px;font:var(--t-tag);color:var(--gold-500)}
+#s2-category .s2-grid{position:absolute;left:0;top:354px;bottom:90px;width:100%;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;z-index:8;contain:paint}
+#s2-category .s2-grid::-webkit-scrollbar{display:none}
+#s2-category .grid{display:grid;grid-template-columns:159px 159px;column-gap:9px;row-gap:16px;padding:0 24px 32px}
+#s2-category .gcard{position:relative;height:200px;background:var(--ink-700);border-radius:var(--r-box);overflow:hidden;display:flex;flex-direction:column}
+#s2-category .gcard .pic{position:absolute;left:0;right:0;top:0;height:146px;background:var(--ink-500);overflow:hidden}
+#s2-category .gcard .pic img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+#s2-category .gcard .txt{position:absolute;left:0;right:0;bottom:0;height:54px;padding:0 12px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;background:var(--ink-700)}
+#s2-category .gcard .name{font:600 20px/26px YBX-Serif,serif;color:var(--silk-200);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:26px}
+#s2-category .gcard .sub{font:var(--t-cap);color:var(--gold-500);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:18px}
+#s2-category .gcard .corner{position:absolute;right:8px;top:8px;width:12px;height:12px;border-top:1.5px solid var(--gold-500);border-right:1.5px solid var(--gold-500)}
+#s2-category .gcard.empty{background:transparent;border:1px dashed var(--ink-500)}
+#s2-category .gcard.empty .pic{background:transparent}
+#s2-category .s2-tabs{bottom:34px}
+#s2-category .s2-axis{position:absolute;left:0;top:354px;bottom:90px;width:100%;overflow-y:auto;overflow-x:hidden;z-index:9;padding:0 24px;contain:paint}
+#s2-category .axis-seg{border-left:1px solid var(--gold-500);padding:0 0 20px 16px;position:relative}
+#s2-category .axis-seg::before{content:"";position:absolute;left:-4px;top:6px;width:7px;height:7px;background:var(--gold-500)}
+#s2-category .axis-seg h3{margin:0 0 2px;font:600 20px/28px YBX-Serif,serif;color:var(--silk-200)}
+#s2-category .axis-seg p{margin:0;font:var(--t-cap);color:var(--white-45)}
+#s2-category .s2-empty{position:absolute;inset:354px 0 90px;display:grid;place-items:center;z-index:10}
+#s2-category .s2-empty .inner{text-align:center;padding:0 24px}
+#s2-category .s2-empty h2{margin:12px 0 4px;font:var(--t-h2);color:var(--silk-200)}
+#s2-category .s2-empty p{margin:0 0 16px;font:var(--t-cap);color:var(--white-60)}
+#s2-category .s2-empty .recs{display:flex;gap:9px;justify-content:center}
+#s2-category .s2-empty .recs a{width:72px;height:72px;border-radius:var(--r-box);overflow:hidden;background:var(--ink-700);border:1px solid var(--ink-500)}
+#s2-category .s2-empty .recs img{width:100%;height:100%;object-fit:cover}
+/* 藏印抽屉：固定高度 316，内容按 316 排版，不溢出 */
+#s2-category .s2-drawer{position:absolute;left:0;right:0;bottom:0;height:316px;background:var(--ink-700);border-top:1px solid var(--gold-500);z-index:90;border-radius:var(--r-box) var(--r-box) 0 0;display:none;flex-direction:column;align-items:center;padding:10px 24px 24px}
+#s2-category .s2-drawer.open{display:flex}
+#s2-category .s2-drawer .handle{width:36px;height:3px;background:var(--ink-500);border-radius:2px;flex:0 0 auto}
+#s2-category .s2-drawer h2{margin:12px 0 4px;font:var(--t-h2);color:var(--silk-200);flex:0 0 auto;width:100%;text-align:center}
+#s2-category .s2-drawer p{margin:0 0 12px;font:var(--t-cap);color:var(--white-60);flex:0 0 auto;width:100%;text-align:center;white-space:normal}
+#s2-category .s2-drawer .seal{width:80px;height:80px;border:1.5px solid var(--gold-500);display:grid;place-items:center;border-radius:var(--r-box);flex:0 0 auto;margin-bottom:14px}
+#s2-category .s2-drawer .seal i{width:14px;height:14px;background:var(--red-600);border-radius:50%}
+#s2-category .s2-drawer .acts{display:flex;gap:9px;width:100%;flex:0 0 auto;margin-top:auto}
+#s2-category .s2-drawer .acts .primary-btn,#s2-category .s2-drawer .acts .secondary-btn{flex:1;min-width:0;height:44px;padding:0 8px;font:var(--t-cap)}
