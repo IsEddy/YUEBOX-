@@ -11,6 +11,24 @@
 <link rel="stylesheet" href="s3.css">
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <!-- YUEBOX 图标：24 网格 / 1.5 线宽 / 方头端点 / 直角 -->
+  <symbol id="ic-01" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M12 5 19 9 12 13 5 9Z"/><path d="M5 9 12 13 12 19 5 15Z"/><path d="M12 13 19 9 19 15 12 19Z"/><path d="M9 9 15 9"/></g></symbol>
+  <symbol id="ic-02" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="16" height="16"/><path d="M12 4v16M4 12h16"/><rect x="4" y="4" width="8" height="8" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-03" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="16" height="16"/><path d="M9 8v8M12 7v10M15 9v6"/></g></symbol>
+  <symbol id="ic-04" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><rect x="10" y="10" width="4" height="4"/></g></symbol>
+  <symbol id="ic-05" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="5" y="5" width="14" height="14"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-06" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="12" height="12"/><path d="m14 14 6 6"/></g></symbol>
+  <symbol id="ic-07" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M15 5 8 12l7 7"/></g></symbol>
+  <symbol id="ic-08" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M14 4h6v6M20 4l-9 9"/><path d="M15 10v10H4V10"/></g></symbol>
+  <symbol id="ic-09" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="16" height="16"/><path d="m10 8 6 4-6 4Z"/></g></symbol>
+  <symbol id="ic-10" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M6 6l12 12M18 6 6 18"/></g></symbol>
+  <symbol id="ic-11" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="4" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="20" cy="12" r="1.5"/></g></symbol>
+  <symbol id="ic-signal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M3 16v3M8 13v6M13 9v10M18 5v14"/></g></symbol>
+  <symbol id="ic-wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 9a15 15 0 0 1 18 0M6 12a10 10 0 0 1 12 0M9 15a6 6 0 0 1 6 0"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-battery" viewBox="0 0 28 24"><g fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="7" width="21" height="10" rx="1"/><path d="M25 10v4"/><rect x="4" y="9" width="14" height="6" fill="currentColor" stroke="none"/></g></symbol>
+</svg>
+
 <main id="s3-detail" class="screen light" data-screen="S3" data-verb="接近">
   <div class="s3-scroll">
     <section class="s3-figure" data-plate="silk">
@@ -55,9 +73,11 @@
 
   <div data-el="hscards"></div>
 
-  <a class="s3-cta" href="ar.html">
-    <svg aria-hidden="true"><use href="#ic-04"/></svg>唤出这件宝
-  </a>
+  <div class="s3-cta-wrap">
+    <a class="s3-cta" href="ar.html">
+      <svg aria-hidden="true"><use href="#ic-04"/></svg>唤出这件宝
+    </a>
+  </div>
 
   <div class="s3-loading" data-state="loading" hidden>
     <div><div class="ring" aria-hidden="true"></div><p>正在展开图版…</p></div>
@@ -84,12 +104,11 @@
   img.alt = `${R.dynasty}${R.name}，${R.material}`;
 
   /* 图版按素材实比例定高：宽 375，高 = 375 / ratio，上限 460 */
-  /* 图版高度：让首屏能看到题名与「是什么」第一行 */
-  const MAX_H = 400, MIN_H = 300;
-  let ph = Math.round(375 / R.ratio);
-  if (ph > MAX_H) ph = MAX_H;
-  if (ph < MIN_H) ph = MIN_H;
+  /* 图版高度 = 屏宽 / 素材真实比例，完整显示不裁切 */
   const plate = q('[data-el="plate"]');
+  let ph = Math.round(375 / R.ratio);
+  const MAXH = 480;
+  if (ph > MAXH) ph = MAXH;
   plate.style.width = '375px';
   plate.style.height = ph + 'px';
   figure.style.height = ph + 'px';
@@ -104,6 +123,23 @@
   q('[data-el="craft"]').innerHTML = R.craft.map(c =>
     `<div class="craft"><b>${c.k}</b><span>${c.n}</span></div>`).join('');
 
+  /* 热点必须落在「图片实际显示区」内，而不是整个图版 */
+  function fitHotspotBox() {
+    const wrap = q('[data-el="hotspots"]');
+    const pimg = q('[data-el="img"]');
+    const pr = plate.getBoundingClientRect();
+    const iw = pimg.naturalWidth, ih = pimg.naturalHeight;
+    if (!iw || !ih) return;
+    const scale = Math.min(pr.width / iw, pr.height / ih);
+    const dw = iw * scale, dh = ih * scale;
+    const ox = (pr.width - dw) / 2, oy = (pr.height - dh) / 2;
+    wrap.style.left = Math.round(ox) + 'px';
+    wrap.style.top = Math.round(oy) + 'px';
+    wrap.style.width = Math.round(dw) + 'px';
+    wrap.style.height = Math.round(dh) + 'px';
+    wrap.style.right = 'auto';
+    wrap.style.bottom = 'auto';
+  }
   const hsWrap = q('[data-el="hotspots"]');
   const cardWrap = q('[data-el="hscards"]');
   hsWrap.innerHTML = R.hotspots.map((h, i) => `
@@ -149,6 +185,11 @@
     collect.setAttribute('aria-pressed', String(!on));
     collect.style.color = on ? '' : 'var(--gold-500)';
   });
+
+  const pimg = q('[data-el="img"]');
+  if (pimg.complete) requestAnimationFrame(fitHotspotBox);
+  else pimg.addEventListener('load', () => requestAnimationFrame(fitHotspotBox), { once: true });
+  addEventListener('resize', fitHotspotBox);
 
   if (params.get('state') === 'loading') {
     const el = q('[data-state="loading"]');

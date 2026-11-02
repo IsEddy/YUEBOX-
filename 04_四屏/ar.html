@@ -4,150 +4,263 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=375, initial-scale=1">
 <meta name="dsh-design" content="app 375x812">
-<title>04 · AR 扫描页 · 唤物</title>
+<title>04 · 识别标注 · 唤物</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="app.css">
 <link rel="stylesheet" href="motion.css">
 <link rel="stylesheet" href="s4.css">
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <symbol id="ic-01" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M12 5 19 9 12 13 5 9Z"/><path d="M5 9 12 13 12 19 5 15Z"/><path d="M12 13 19 9 19 15 12 19Z"/><path d="M9 9 15 9"/></g></symbol>
+  <symbol id="ic-02" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="16" height="16"/><path d="M12 4v16M4 12h16"/><rect x="4" y="4" width="8" height="8" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-03" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="16" height="16"/><path d="M9 8v8M12 7v10M15 9v6"/></g></symbol>
+  <symbol id="ic-04" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><rect x="10" y="10" width="4" height="4"/></g></symbol>
+  <symbol id="ic-05" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="5" y="5" width="14" height="14"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-06" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="12" height="12"/><path d="m14 14 6 6"/></g></symbol>
+  <symbol id="ic-07" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M15 5 8 12l7 7"/></g></symbol>
+  <symbol id="ic-08" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M14 4h6v6M20 4l-9 9"/><path d="M15 10v10H4V10"/></g></symbol>
+  <symbol id="ic-09" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="16" height="16"/><path d="m10 8 6 4-6 4Z"/></g></symbol>
+  <symbol id="ic-10" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M6 6l12 12M18 6 6 18"/></g></symbol>
+  <symbol id="ic-11" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="4" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="20" cy="12" r="1.5"/></g></symbol>
+  <symbol id="ic-signal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M3 16v3M8 13v6M13 9v10M18 5v14"/></g></symbol>
+  <symbol id="ic-wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 9a15 15 0 0 1 18 0M6 12a10 10 0 0 1 12 0M9 15a6 6 0 0 1 6 0"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-battery" viewBox="0 0 28 24"><g fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="7" width="21" height="10" rx="1"/><path d="M25 10v4"/><rect x="4" y="9" width="14" height="6" fill="currentColor" stroke="none"/></g></symbol>
+</svg>
+
 <main id="s4-ar" class="screen" data-screen="S4" data-verb="唤物">
-  <section class="layer s4-cam" data-layer="00_相机底" aria-hidden="true">
+  <section class="s4-cam" aria-hidden="true">
     <img src="img/c2_shenkan_close.jpg" alt="">
-    <span class="s4-mask"></span>
-    <span class="s4-vig"></span>
   </section>
 
-  <header class="layer s4-head" data-layer="20_顶部">
+  <header class="s4-head">
     <span class="seq">04</span>
     <h1>唤物</h1>
-    <p>把镜头对准展签<br>或试着唤出下面这几件</p>
+    <p>对准展品，它会自己说话</p>
   </header>
 
-  <section class="layer" data-layer="30_取景框">
-    <div class="s4-frame" data-frame>
-      <span class="cn"></span><span class="cn"></span><span class="cn"></span><span class="cn"></span>
-      <span class="cross"></span>
-      <span class="scan-line" aria-hidden="true"></span>
+  <div class="detect" data-detect>
+    <span class="cn"></span><span class="cn"></span><span class="cn"></span><span class="cn"></span>
+    <span class="glow"></span>
+    <span class="scan"></span>
+  </div>
+
+  <div class="anno" data-anno>
+    <div class="panel">
+      <p class="k"><span class="tw" data-anno-name></span></p>
+      <p class="v" data-anno-desc></p>
+      <p class="meta"><span data-anno-dyn></span><span class="sep">·</span><span data-anno-cat></span></p>
     </div>
-  </section>
+    <div class="stem"></div>
+    <div class="dot"></div>
+  </div>
 
-  <!-- 底部控件组：结果出现时整体收起 -->
-  <div class="s4-bottom" data-layer="40_底部控件">
-    <section class="layer s4-examples">
-      <div class="row">
-        <button type="button" data-example="molong"><span class="thumb"><img src="img/c1_molong.jpg" alt="墨龙图"></span><span>墨龙图</span></button>
-        <button type="button" data-example="shenkan"><span class="thumb"><img src="img/c2_shenkan.jpg" alt="大神龛"></span><span>大神龛</span></button>
-        <button type="button" data-example="fan"><span class="thumb"><img src="img/c8_fan.jpg" alt="外销扇"></span><span>外销扇</span></button>
-      </div>
-    </section>
+  <div class="s4-particles" aria-hidden="true">
+    <i style="left:70px;top:320px"></i><i style="left:104px;top:306px"></i><i style="left:138px;top:324px"></i><i style="left:172px;top:308px"></i>
+    <i style="left:206px;top:326px"></i><i style="left:240px;top:312px"></i><i style="left:274px;top:328px"></i><i style="left:308px;top:316px"></i>
+    <i style="left:120px;top:356px"></i><i style="left:190px;top:362px"></i><i style="left:260px;top:358px"></i><i style="left:330px;top:346px"></i>
+  </div>
 
-    <section class="layer s4-status">
-      <p data-status>对准展签或文物</p>
-    </section>
-
-    <section class="layer s4-actions">
+  <div class="s4-bottom">
+    <p class="hint" data-status>把镜头对准展品</p>
+    <div class="acts">
       <button class="primary-btn" type="button" data-action="scan">开始识别</button>
-      <button class="secondary-btn" type="button" data-action="demo">没有实物？试试示例</button>
-    </section>
+      <button class="secondary-btn" type="button" data-action="reset">重新对准</button>
+    </div>
   </div>
 
-  <div class="layer s4-particles" data-layer="65_粒子" aria-hidden="true">
-    <i style="left:60px;top:300px"></i><i style="left:96px;top:286px"></i><i style="left:132px;top:304px"></i><i style="left:168px;top:288px"></i>
-    <i style="left:204px;top:306px"></i><i style="left:240px;top:292px"></i><i style="left:276px;top:308px"></i><i style="left:312px;top:296px"></i>
-    <i style="left:120px;top:340px"></i><i style="left:192px;top:348px"></i><i style="left:264px;top:342px"></i><i style="left:336px;top:334px"></i>
-  </div>
+  <div class="s4-corner-hint" aria-hidden="true"><span>YUEBOX · 识别即标注</span></div>
 
-  <section class="s4-result" data-result role="dialog" aria-label="识别结果">
-    <div class="thumb"><img src="img/c1_molong.jpg" alt="墨龙图"></div>
-    <h2>它出来了。</h2>
-    <p>南宋·陈容《墨龙图》，一条在留白里翻身的龙。</p>
-    <a class="go" href="detail.html">看看它</a>
+  <section class="s4-fail" data-fail hidden>
+    <p>没认出来。换个角度、离近一点，或对准展签试试。</p>
   </section>
 
-  <section class="layer s4-fail" data-fail hidden>
-    <p>这件宝贝还在盒子里睡觉，换一件试试？</p>
-  </section>
-
-  <section class="layer s4-noperm" data-noperm hidden>
+  <section class="s4-noperm" data-noperm hidden>
     <div class="inner">
       <svg width="32" height="32" style="margin:0 auto;color:var(--gold-500)" aria-hidden="true"><use href="#ic-04"/></svg>
       <h2>没有相机也能玩</h2>
-      <p>进入演示模式，从示例里唤出一件宝贝。</p>
+      <p>进入演示模式，用示例画面体验识别标注。</p>
       <button class="primary-btn" type="button" data-action="demo">进入演示模式</button>
     </div>
   </section>
 
-  <section class="layer" data-layer="70_TabBar">
-    <nav class="tabbar" aria-label="主导航">
-      <a href="splash.html"><svg aria-hidden="true"><use href="#ic-01"/></svg><span>宝盒</span></a>
-      <a href="category.html"><svg aria-hidden="true"><use href="#ic-02"/></svg><span>分格</span></a>
-      <a href="ar.html" aria-current="page"><svg aria-hidden="true"><use href="#ic-04"/></svg><span>唤物</span></a>
-      <a href="category.html?drawer=1"><svg aria-hidden="true"><use href="#ic-05"/></svg><span>藏印</span></a>
-    </nav>
-    <div class="home-indicator" aria-hidden="true"></div>
-  </section>
+  <nav class="tabbar" aria-label="主导航">
+    <a href="splash.html"><svg aria-hidden="true"><use href="#ic-01"/></svg><span>宝盒</span></a>
+    <a href="category.html"><svg aria-hidden="true"><use href="#ic-02"/></svg><span>分格</span></a>
+    <a href="ar.html" aria-current="page"><svg aria-hidden="true"><use href="#ic-04"/></svg><span>唤物</span></a>
+    <a href="category.html?drawer=1"><svg aria-hidden="true"><use href="#ic-05"/></svg><span>藏印</span></a>
+  </nav>
+  <div class="home-indicator" aria-hidden="true"></div>
 </main>
+
+<script src="data/relics.js"></script>
+<script src="motion.js"></script>
 <script>
-const root = document.getElementById('s4-ar');
-const p = new URLSearchParams(location.search);
-const status = root.querySelector('[data-status]');
-const result = root.querySelector('[data-result]');
-const frame = root.querySelector('[data-frame]');
-const particles = root.querySelector('.s4-particles');
-const fail = root.querySelector('[data-fail]');
-const noperm = root.querySelector('[data-noperm]');
+(function () {
+  const root = document.getElementById('s4-ar');
+  const p = new URLSearchParams(location.search);
+  const R = window.RELICS || {};
+  const q = (s) => root.querySelector(s);
 
-function setStatus(t) { status.textContent = t; }
+  const detect = q('[data-detect]');
+  const anno = q('[data-anno]');
+  const status = q('[data-status]');
+  const fail = q('[data-fail]');
+  const noperm = q('[data-noperm]');
+  const particles = q('.s4-particles');
 
-function reset() {
-  root.classList.remove('showing-result');
-  root.classList.remove('scanning');
-  result.classList.remove('on');
-  fail.hidden = true;
-  particles.classList.remove('go');
-  frame.style.transform = '';
-  frame.style.opacity = '1';
-  setStatus('对准展签或文物');
-}
+  const TARGETS = {
+    shenkan:  { x:10, y:12, w:80, h:64 },
+    molong:   { x:24, y:6,  w:52, h:78 },
+    guangcai: { x:16, y:14, w:68, h:62 },
+    houwang:  { x:20, y:18, w:60, h:54 },
+    fan:      { x:12, y:24, w:76, h:46 }
+  };
 
-function succeed() {
-  root.classList.remove('scanning');
-  setStatus('它出来了。');
-  frame.style.transform = 'scale(1)';
-  particles.classList.add('go');
-  setTimeout(() => {
-    result.classList.add('on');
-    root.classList.add('showing-result');   // 收起底部控件
-    frame.style.opacity = '0';
-  }, 240);
-}
+  let current = null;
 
-function scanning() {
-  setStatus('正在唤醒它…');
-  root.classList.add('scanning');
-  frame.style.transform = 'scale(1.06)';
-  setTimeout(() => { frame.style.transform = 'scale(1)'; }, 240);
-  setTimeout(succeed, 1200);
-}
+  function reset() {
+    root.classList.remove('showing-result');
+    detect.classList.remove('on');
+    anno.classList.remove('on');
+    particles.classList.remove('go');
+    fail.hidden = true;
+    status.textContent = '把镜头对准展品';
+    current = null;
+  }
 
-if (p.get('state') === 'noperm') { noperm.hidden = false; }
-if (p.get('state') === 'success') { setTimeout(succeed, 300); }
-if (p.get('state') === 'fail') {
-  setTimeout(() => {
-    fail.hidden = false;
-    setStatus('这件宝贝还在盒子里睡觉，换一件试试？');
-  }, 300);
-}
+  function place(t) {
+    const r = root.getBoundingClientRect();
+    const TOP_SAFE = 170, BOT_SAFE = 700;
+    const bx = r.width * t.x / 100;
+    const bw = r.width * t.w / 100;
+    // 识别框限制在 170 ~ 700 之间
+    let by = Math.max(TOP_SAFE, r.height * t.y / 100);
+    let bh = r.height * t.h / 100;
+    if (by + bh > BOT_SAFE) bh = BOT_SAFE - by;
+    detect.style.left = bx + 'px';
+    detect.style.top = by + 'px';
+    detect.style.width = bw + 'px';
+    detect.style.height = bh + 'px';
+    detect.style.setProperty('--sh', Math.round(bh) + 'px');
 
-root.addEventListener('click', (e) => {
-  const t = e.target.closest('[data-action],[data-example]');
-  if (!t) return;
-  if (t.dataset.example) { reset(); scanning(); return; }
-  const a = t.dataset.action;
-  if (a === 'scan') { reset(); scanning(); }
-  if (a === 'demo') { noperm.hidden = true; reset(); scanning(); }
-});
+    const panel = anno.querySelector('.panel');
+    const panelW = 240;
+    let ax = bx + bw / 2 - panelW / 2;
+    ax = Math.max(12, Math.min(ax, r.width - panelW - 12));
+    anno.style.width = panelW + 'px';
+    const panelH = panel.offsetHeight || 92;
+    let ay = by - panelH - 26;
+    const above = ay >= 100;
+    if (!above) ay = by + bh + 16;
+    // 不许压到 TabBar（722 上沿）和底部按钮
+    // 标注卡必须完整落在安全区内（上 180 / 下 700）
+    const SAFE_BOTTOM = 700;
+    ay = Math.min(ay, SAFE_BOTTOM - panelH);
+    if (ay < 180) ay = Math.max(180, SAFE_BOTTOM - panelH);
+    if (ay + panelH > SAFE_BOTTOM) ay = SAFE_BOTTOM - panelH;
+    anno.style.left = ax + 'px';
+    anno.style.top = ay + 'px';
+    anno.style.width = panelW + 'px';
+    anno.querySelector('.stem').style.display = above ? 'block' : 'none';
+  }
+
+  function annotate(id) {
+    const relic = R[id];
+    const t = TARGETS[id];
+    if (!relic || !t) {
+      fail.hidden = false;
+      status.textContent = '没认出来，换个角度试试';
+      return;
+    }
+    current = id;
+
+    /* 1) 先填内容，再测高度（否则测到的是旧高度，文字会被裁） */
+    q('[data-anno-name]').textContent = relic.name;
+    q('[data-anno-desc]').textContent = relic.why;
+    q('[data-anno-dyn]').textContent = relic.dynasty;
+    q('[data-anno-cat]').textContent = relic.category;
+
+    /* 2) 放识别框 */
+    const r = root.getBoundingClientRect();
+    const TOP_SAFE = 178, BOT_SAFE = 700;
+    const bx = r.width * t.x / 100;
+    const bw = r.width * t.w / 100;
+    let by = Math.max(TOP_SAFE, r.height * t.y / 100);
+    let bh = r.height * t.h / 100;
+    if (by + bh > BOT_SAFE) bh = BOT_SAFE - by;
+    detect.style.left = bx + 'px';
+    detect.style.top = by + 'px';
+    detect.style.width = bw + 'px';
+    detect.style.height = bh + 'px';
+    detect.style.setProperty('--sh', Math.round(bh) + 'px');
+
+    /* 3) 内容已就位，此时测量才准确 */
+    const panelW = 240;
+    anno.style.width = panelW + 'px';
+    anno.style.left = '0px';
+    anno.style.top = '0px';
+    const panelH = Math.round(anno.querySelector('.panel').getBoundingClientRect().height) || 96;
+
+    let ax = bx + bw / 2 - panelW / 2;
+    ax = Math.max(12, Math.min(ax, r.width - panelW - 12));
+    let ay = by - panelH - 28;
+    let above = ay >= TOP_SAFE;
+    if (!above) ay = by + bh + 16;
+    /* 必须完整落在安全区内 */
+    if (ay + panelH > BOT_SAFE) ay = BOT_SAFE - panelH;
+    if (ay < TOP_SAFE) { ay = TOP_SAFE; above = false; }
+    anno.style.left = ax + 'px';
+    anno.style.top = ay + 'px';
+    anno.querySelector('.stem').style.display = above ? 'block' : 'none';
+
+    /* 4) 动画 */
+    detect.classList.add('on');
+    anno.classList.remove('on');
+    requestAnimationFrame(() => {
+      ano_show();
+    });
+    function ano_show() {
+      anno.classList.add('on');
+      status.textContent = '已识别 · ' + relic.name;
+      particles.classList.add('go');
+      root.classList.add('showing-result');
+      fail.hidden = true;
+    }
+  }
+
+  function scanning() {
+    reset();
+    status.textContent = '正在辨认…';
+    detect.style.left = '24px';
+    detect.style.top = '210px';
+    detect.style.width = '327px';
+    detect.style.height = '250px';
+    detect.style.setProperty('--sh', '250px');
+    detect.classList.add('on');
+    setTimeout(() => {
+      const ids = Object.keys(TARGETS);
+      annotate(ids[Math.floor(Math.random() * ids.length)]);
+    }, 1500);
+  }
+
+  if (p.get('state') === 'noperm') noperm.hidden = false;
+  if (p.get('state') === 'fail') setTimeout(() => { fail.hidden = false; status.textContent = '没认出来'; }, 300);
+  if (p.get('state') === 'hit') setTimeout(() => annotate(p.get('id') || 'shenkan'), 400);
+
+  root.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-action]');
+    if (!t) return;
+    const a = t.dataset.action;
+    if (a === 'scan') scanning();
+    if (a === 'reset') reset();
+    if (a === 'demo') { noperm.hidden = true; scanning(); }
+  });
+
+  anno.addEventListener('click', () => {
+    if (current) location.href = 'detail.html?id=' + current;
+  });
+})();
 </script>
 </body>
 </html>

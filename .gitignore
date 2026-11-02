@@ -74,3 +74,5 @@ manifest.json
 
 # ---------- 其他会话的 claude-design 画布（非本项目四屏交付）----------
 designs/
+
+# 注：model/ 下的 .glb 模型需要入库（Tripo 导出，交付用）
