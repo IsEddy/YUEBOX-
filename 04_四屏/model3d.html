@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=375, initial-scale=1">
+<meta name="dsh-design" content="app 375x812">
+<title>05 · 唤出实物 · 3D 模型</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="motion.css">
+<link rel="stylesheet" href="s5.css">
+<script type="module">
+  await import('./vendor/model-viewer.min.js');
+</script>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <symbol id="ic-04" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><rect x="10" y="10" width="4" height="4"/></g></symbol>
+  <symbol id="ic-07" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M15 5 8 12l7 7"/></g></symbol>
+  <symbol id="ic-08" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M14 4h6v6M20 4l-9 9"/><path d="M15 10v10H4V10"/></g></symbol>
+  <symbol id="ic-signal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M3 16v3M8 13v6M13 9v10M18 5v14"/></g></symbol>
+  <symbol id="ic-wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 9a15 15 0 0 1 18 0M6 12a10 10 0 0 1 12 0M9 15a6 6 0 0 1 6 0"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-battery" viewBox="0 0 28 24"><g fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="7" width="21" height="10" rx="1"/><path d="M25 10v4"/><rect x="4" y="9" width="14" height="6" fill="currentColor" stroke="none"/></g></symbol>
+</svg>
+
+<main id="s5-3d" class="screen" data-screen="S5" data-verb="唤物">
+  <header class="statusbar" aria-label="状态栏" style="color:var(--silk-200)">
+    <span>9:41</span>
+    <span class="right">
+      <svg width="16" height="16" aria-hidden="true"><use href="#ic-signal"/></svg>
+      <svg width="16" height="16" aria-hidden="true"><use href="#ic-wifi"/></svg>
+      <svg width="22" height="16" aria-hidden="true"><use href="#ic-battery"/></svg>
+    </span>
+  </header>
+
+  <section class="stage" data-layer="20_模型舞台">
+    <div class="stage-glow" aria-hidden="true"></div>
+    <div class="model-wrap">
+      <model-viewer id="mv" src="model/vase_plain.glb" alt="广彩龙纹双象耳瓶 3D 模型"
+        camera-controls touch-action="pan-y" auto-rotate auto-rotate-delay="900"
+        rotation-per-second="16deg" shadow-intensity="0.5" shadow-softness="0.95"
+        exposure="1.1" environment-image="neutral" min-field-of-view="18deg"
+        max-field-of-view="46deg" loading="eager"></model-viewer>
+    </div>
+    <div class="stage-floor" aria-hidden="true"></div>
+    <div class="plate-ring" aria-hidden="true"></div>
+  </section>
+
+  <header class="head" data-layer="30_标题区">
+    <a class="back" href="ar.html" aria-label="返回识别页">
+      <svg width="20" height="20" aria-hidden="true"><use href="#ic-07"/></svg>
+    </a>
+    <div class="head-txt">
+      <span class="seq">05</span>
+      <h1 data-el="name">唤出实物</h1>
+      <p class="meta"><span data-el="dyn"></span><span class="sep">·</span><span data-el="cat"></span></p>
+    </div>
+    <button class="act" type="button" aria-label="分享" data-action="share">
+      <svg width="20" height="20" aria-hidden="true"><use href="#ic-08"/></svg>
+    </button>
+  </header>
+
+  <div class="hint" data-layer="40_提示">
+    <span class="dot" aria-hidden="true"></span>拖动旋转 · 双指缩放
+  </div>
+
+  <div class="bottom" data-layer="50_操作区">
+    <div class="stat-row">
+      <span class="stat"><b>360°</b><i>可旋转</i></span>
+      <span class="bar" aria-hidden="true"></span>
+      <span class="stat"><b>AR</b><i>可投放</i></span>
+      <span class="bar" aria-hidden="true"></span>
+      <span class="stat"><b data-el="hotspots">3</b><i>处细节</i></span>
+    </div>
+    <div class="acts">
+      <button class="primary-btn" type="button" data-action="ar">
+        <svg width="20" height="20" aria-hidden="true"><use href="#ic-04"/></svg>在实景中摆放
+      </button>
+      <a class="secondary-btn" href="detail.html?id=guangcai">看这件的来历</a>
+    </div>
+  </div>
+
+  <section class="fallback" data-state="fallback" hidden>
+    <div class="inner">
+      <svg width="32" height="32" style="margin:0 auto 12px;color:var(--gold-500)" aria-hidden="true"><use href="#ic-04"/></svg>
+      <h2>这台设备暂时放不出 3D</h2>
+      <p>可以先看这件的图片与来历。</p>
+      <a class="primary-btn" href="detail.html?id=guangcai">查看详情</a>
+    </div>
+  </section>
+</main>
+
+<script src="data/relics.js"></script>
+<script type="module">
+  const root = document.getElementById('s5-3d');
+  const p = new URLSearchParams(location.search);
+  const id = p.get('id') || 'guangcai';
+  const R = (window.RELICS || {})[id] || {};
+  const q = (s) => root.querySelector(s);
+  if (R.name) {
+    q('[data-el="name"]').textContent = R.name;
+    q('[data-el="dyn"]').textContent = R.dynasty || '';
+    q('[data-el="cat"]').textContent = R.category || '';
+    if (R.hotspots) q('[data-el="hotspots"]').textContent = R.hotspots.length;
+    document.title = '05 · ' + R.name + ' · 3D';
+  }
+  const mv = q('#mv');
+  const fallback = q('[data-state="fallback"]');
+  const hasGL = (() => { try {
+    const c = document.createElement('canvas');
+    return !!(window.WebGLRenderingContext && (c.getContext('webgl') || c.getContext('experimental-webgl')));
+  } catch (e) { return false; } })();
+  if (!hasGL) fallback.hidden = false;
+  if (mv) {
+    mv.addEventListener('load', () => { fallback.hidden = true; });
+    mv.addEventListener('error', () => { fallback.hidden = false; });
+    setTimeout(() => { if (!mv.loaded && hasGL) fallback.hidden = false; }, 8000);
+  }
+  root.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-action]');
+    if (!t) return;
+    if (t.dataset.action === 'ar' && mv) {
+      try { if (mv.canActivateAR) mv.activateAR(); else t.textContent = '此设备不支持系统 AR'; }
+      catch (err) { t.textContent = '此设备不支持系统 AR'; }
+    }
+    if (t.dataset.action === 'share') { t.setAttribute('aria-pressed','true'); t.style.color='var(--gold-500)'; }
+  });
+</script>
+</body>
+</html>

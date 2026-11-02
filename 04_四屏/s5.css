@@ -1,0 +1,43 @@
+/* YUEBOX · 屏 5 · 3D 唤出实物 */
+
+#s5-3d{background:#0d0b09;overflow:hidden}
+
+/* ---------- 3D 舞台 ---------- */
+#s5-3d .stage{position:absolute;left:0;top:0;width:100%;height:620px;z-index:5}
+#s5-3d .stage-glow{position:absolute;left:50%;top:180px;width:340px;height:340px;transform:translateX(-50%);background:radial-gradient(circle,rgba(201,162,39,.16) 0%,rgba(201,162,39,.05) 42%,transparent 70%);pointer-events:none}
+#s5-3d .model-wrap{position:absolute;left:0;top:96px;width:100%;height:436px}
+#s5-3d model-viewer{width:100%;height:100%;background:transparent;outline:none;--poster-color:transparent}
+#s5-3d .stage-floor{position:absolute;left:50%;bottom:190px;width:250px;height:34px;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(0,0,0,.62) 0%,transparent 72%);filter:blur(10px);pointer-events:none}
+#s5-3d .plate-ring{position:absolute;left:50%;bottom:204px;width:170px;height:22px;transform:translateX(-50%);border:1px solid rgba(201,162,39,.22);border-radius:50%;pointer-events:none}
+
+/* ---------- 顶部 ---------- */
+#s5-3d .head{position:absolute;left:0;top:44px;width:100%;padding:8px 16px 0;display:flex;align-items:flex-start;gap:8px;z-index:20}
+#s5-3d .head .back,#s5-3d .head .act{width:40px;height:40px;display:grid;place-items:center;background:rgba(20,17,15,.5);border:1px solid rgba(201,162,39,.18);border-radius:var(--r-box);color:var(--silk-200);flex:0 0 40px;padding:0}
+#s5-3d .head .back:active,#s5-3d .head .act:active{background:rgba(20,17,15,.75)}
+#s5-3d .head-txt{flex:1 1 auto;min-width:0;text-align:center;padding-top:2px}
+#s5-3d .head .seq{display:block;font:var(--t-num);letter-spacing:.06em;color:var(--gold-500);line-height:14px}
+#s5-3d .head h1{margin:4px 0 0;font:600 20px/26px YBX-Serif,serif;color:var(--silk-200);letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#s5-3d .head .meta{margin:3px 0 0;font:var(--t-tag);color:rgba(255,255,255,.55);display:flex;justify-content:center;gap:4px}
+
+/* ---------- 提示 ---------- */
+#s5-3d .hint{position:absolute;left:50%;bottom:246px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;font:var(--t-tag);color:rgba(255,255,255,.45);z-index:15;white-space:nowrap}
+#s5-3d .hint .dot{width:4px;height:4px;background:var(--gold-500);border-radius:50%;animation:hint-pulse 1.8s ease-in-out infinite}
+@keyframes hint-pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* ---------- 底部 ---------- */
+#s5-3d .bottom{position:absolute;left:0;right:0;bottom:44px;padding:0 24px;z-index:22}
+#s5-3d .stat-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px;background:rgba(20,17,15,.72);border:1px solid rgba(201,162,39,.14);border-radius:var(--r-box);padding:10px 0;backdrop-filter:blur(8px)}
+#s5-3d .stat{display:flex;flex-direction:column;align-items:center;gap:2px}
+#s5-3d .stat b{font:500 14px/18px YBX-Inter,sans-serif;color:var(--gold-500);letter-spacing:.02em}
+#s5-3d .stat i{font:var(--t-tag);color:rgba(255,255,255,.42);font-style:normal}
+#s5-3d .stat-row .bar{width:1px;height:22px;background:rgba(201,162,39,.2)}
+#s5-3d .acts{display:flex;flex-direction:column;gap:9px}
+#s5-3d .acts .primary-btn{height:48px}
+#s5-3d .acts .secondary-btn{height:42px;border-color:rgba(201,162,39,.4);color:rgba(255,255,255,.75)}
+
+/* ---------- 兜底 ---------- */
+#s5-3d .fallback{position:absolute;inset:0;background:#0d0b09;display:grid;place-items:center;z-index:40;padding:0 24px}
+#s5-3d .fallback .inner{text-align:center;width:100%}
+#s5-3d .fallback h2{margin:0 0 8px;font:var(--t-h2);color:var(--silk-200)}
+#s5-3d .fallback p{margin:0 0 22px;font:var(--t-cap);color:rgba(255,255,255,.55);line-height:18px}
+#s5-3d .fallback .primary-btn{width:100%;height:46px}
