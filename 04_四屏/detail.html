@@ -4,103 +4,158 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=375, initial-scale=1">
 <meta name="dsh-design" content="app 375x812">
-<title>03 · 文物详情页 · 接近</title>
+<title>03 · 文物详情 · 接近</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="motion.css">
 <link rel="stylesheet" href="s3.css">
 </head>
 <body>
 <main id="s3-detail" class="screen light" data-screen="S3" data-verb="接近">
-  <div class="s3-scroll" data-layer="10_滚动内容">
-    <section class="s3-figure" data-layer="20_图版区">
-      <div class="plate">
-        <img src="img/c1_molong.jpg" alt="南宋陈容《墨龙图》轴，绢本墨笔，纵205.3横131厘米">
+  <div class="s3-scroll">
+    <section class="s3-figure" data-plate="silk">
+      <div class="plate" data-el="plate">
+        <img class="art" data-el="img" src="" alt="">
         <span class="fiber" aria-hidden="true"></span>
         <span class="vig" aria-hidden="true"></span>
+        <div class="hotspots" data-el="hotspots"></div>
       </div>
-      <button class="hotspot" type="button" data-at="1" data-hotspot="1" aria-label="热点：龙头"><i></i></button>
-      <button class="hotspot" type="button" data-at="2" data-hotspot="2" aria-label="热点：龙身"><i></i></button>
-      <button class="hotspot" type="button" data-at="3" data-hotspot="3" aria-label="热点：云雾"><i></i></button>
     </section>
 
     <div class="mount" aria-hidden="true"></div>
 
-    <section class="s3-title" data-layer="30_题跋区">
-      <h1>墨龙图</h1>
-      <p class="info"><span>南宋</span>·<span>绢本墨笔</span>·<span>205.3 × 131 cm</span></p>
+    <section class="s3-title enter" style="--i:1">
+      <h1 data-el="name">—</h1>
+      <p class="info" data-el="info"></p>
     </section>
 
-    <section class="s3-glance" data-layer="31_一眼看懂">
-      <div class="glance-row"><span class="dot" aria-hidden="true"></span><span class="k">是什么</span><p class="v">南宋画家陈容所绘，粤博最名贵的古画之一，一级文物。</p></div>
-      <div class="glance-row"><span class="dot" aria-hidden="true"></span><span class="k">厉害在哪</span><p class="v">墨分五色、浓淡破墨，龙身 S 形扭转，云雾全靠留白。</p></div>
-      <div class="glance-row"><span class="dot" aria-hidden="true"></span><span class="k">怎么看</span><p class="v">原件不对外展出——正因如此，这里提供数字复现与局部放大，让看不到的细节被看见。</p></div>
+    <section class="s3-glance enter" style="--i:2">
+      <div class="glance-row"><span class="dot"></span><span class="k">是什么</span><p class="v" data-el="what"></p></div>
+      <div class="glance-row"><span class="dot"></span><span class="k">厉害在哪</span><p class="v" data-el="why"></p></div>
+      <div class="glance-row"><span class="dot"></span><span class="k">怎么看</span><p class="v" data-el="how"></p></div>
     </section>
 
-    <section class="s3-craft" data-layer="32_工艺分解">
+    <section class="s3-craft enter" style="--i:3">
       <h2>工艺分解</h2>
-      <div class="craft-rail">
-        <div class="craft"><b>绢本托裱</b><span>01</span></div>
-        <div class="craft"><b>浓淡破墨</b><span>02</span></div>
-        <div class="craft"><b>破墨留白</b><span>03</span></div>
-      </div>
+      <div class="craft-rail" data-el="craft"></div>
     </section>
+
     <div class="s3-pad" aria-hidden="true"></div>
   </div>
 
   <div class="s3-top" aria-hidden="true"></div>
-  <div class="s3-controls" data-layer="40_浮层控件">
-    <a class="icon-btn white" href="category.html" aria-label="返回分类页"><svg aria-hidden="true"><use href="#ic-07"/></svg></a>
-    <button class="icon-btn white" type="button" aria-label="收藏这件" data-action="collect"><svg aria-hidden="true"><use href="#ic-05"/></svg></button>
+  <div class="s3-controls">
+    <a class="icon-btn white" href="category.html" aria-label="返回分类页" data-back>
+      <svg aria-hidden="true"><use href="#ic-07"/></svg>
+    </a>
+    <button class="icon-btn white" type="button" aria-label="收藏这件" data-action="collect">
+      <svg aria-hidden="true"><use href="#ic-05"/></svg>
+    </button>
   </div>
 
-  <div class="hs-card" data-hotspot-card="1" role="dialog" aria-label="热点说明"><button class="close" type="button" data-action="close-hs" aria-label="关闭"><svg width="16" height="16" aria-hidden="true"><use href="#ic-10"/></svg></button><h3>龙首</h3><p>龙首回望，须发以极细的笔线一根根勾出，浓墨压住结构，淡墨晕出体积。</p></div>
-  <div class="hs-card" data-hotspot-card="2" role="dialog" aria-label="热点说明"><button class="close" type="button" data-action="close-hs" aria-label="关闭"><svg width="16" height="16" aria-hidden="true"><use href="#ic-10"/></svg></button><h3>龙身</h3><p>S 形扭转贯穿整幅，墨色由浓到淡分五层，越往后越淡，像从云里退出来。</p></div>
-  <div class="hs-card" data-hotspot-card="3" role="dialog" aria-label="热点说明"><button class="close" type="button" data-action="close-hs" aria-label="关闭"><svg width="16" height="16" aria-hidden="true"><use href="#ic-10"/></svg></button><h3>云雾</h3><p>云雾不画，靠留白。空白处就是云，龙身在空白里显形。</p></div>
+  <div data-el="hscards"></div>
 
-  <a class="s3-cta" href="ar.html" data-layer="50_固定CTA">
+  <a class="s3-cta" href="ar.html">
     <svg aria-hidden="true"><use href="#ic-04"/></svg>唤出这件宝
   </a>
 
-  <div class="s3-loading" data-layer="60_状态层" data-state="loading" hidden>
+  <div class="s3-loading" data-state="loading" hidden>
     <div><div class="ring" aria-hidden="true"></div><p>正在展开图版…</p></div>
   </div>
 </main>
+
+<script src="data/relics.js"></script>
+<script src="motion.js"></script>
 <script>
-const root = document.getElementById('s3-detail');
-const p = new URLSearchParams(location.search);
-if (p.get('state') === 'loading') {
-  const el = root.querySelector('[data-state="loading"]');
-  el.hidden = false;
-  setTimeout(() => { el.hidden = true; }, 1400);
-}
-const cards = [...root.querySelectorAll('[data-hotspot-card]')];
-root.querySelectorAll('[data-hotspot]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const id = btn.dataset.hotspot;
-    const card = root.querySelector(`[data-hotspot-card="${id}"]`);
+(function () {
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id') || 'molong';
+  const R = (window.RELICS || {})[id] || window.RELICS.molong;
+  const root = document.getElementById('s3-detail');
+  const q = (sel) => root.querySelector(sel);
+
+  document.title = `${R.seq} · ${R.name} · 接近`;
+
+  const figure = q('.s3-figure');
+  figure.dataset.plate = R.plate || 'silk';
+
+  const img = q('[data-el="img"]');
+  img.src = R.img;
+  img.alt = `${R.dynasty}${R.name}，${R.material}`;
+
+  /* 图版按素材实比例定高：宽 375，高 = 375 / ratio，上限 460 */
+  /* 图版高度：让首屏能看到题名与「是什么」第一行 */
+  const MAX_H = 400, MIN_H = 300;
+  let ph = Math.round(375 / R.ratio);
+  if (ph > MAX_H) ph = MAX_H;
+  if (ph < MIN_H) ph = MIN_H;
+  const plate = q('[data-el="plate"]');
+  plate.style.width = '375px';
+  plate.style.height = ph + 'px';
+  figure.style.height = ph + 'px';
+
+  q('[data-el="name"]').textContent = R.name;
+  q('[data-el="info"]').innerHTML =
+    `<span>${R.dynasty}</span>·<span>${R.material}</span>·<span>${R.size}</span>`;
+  q('[data-el="what"]').textContent = R.what;
+  q('[data-el="why"]').textContent = R.why;
+  q('[data-el="how"]').textContent = R.how;
+
+  q('[data-el="craft"]').innerHTML = R.craft.map(c =>
+    `<div class="craft"><b>${c.k}</b><span>${c.n}</span></div>`).join('');
+
+  const hsWrap = q('[data-el="hotspots"]');
+  const cardWrap = q('[data-el="hscards"]');
+  hsWrap.innerHTML = R.hotspots.map((h, i) => `
+    <button class="hotspot" type="button" data-hotspot="${i}"
+            style="left:${h.x}%;top:${h.y}%" aria-label="热点：${h.title}">
+      <i></i>
+    </button>`).join('');
+  cardWrap.innerHTML = R.hotspots.map((h, i) => `
+    <div class="hs-card" data-card="${i}" role="dialog" aria-label="${h.title}">
+      <button class="close" type="button" data-close aria-label="关闭">
+        <svg width="16" height="16" aria-hidden="true"><use href="#ic-10"/></svg>
+      </button>
+      <h3>${h.title}</h3><p>${h.text}</p>
+    </div>`).join('');
+
+  const cards = [...cardWrap.querySelectorAll('.hs-card')];
+  hsWrap.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-hotspot]');
+    if (!btn) return;
+    const i = btn.dataset.hotspot;
+    const card = cardWrap.querySelector(`[data-card="${i}"]`);
     const isOpen = card.classList.contains('on');
     cards.forEach(c => c.classList.remove('on'));
     if (isOpen) return;
-    card.classList.add('on');
-    // 定位到热点正下方，并限制在可视区域内
-    const r = btn.getBoundingClientRect();
+    const br = btn.getBoundingClientRect();
     const cw = 280;
-    const ch = card.offsetHeight || 120;
-    let left = r.left + r.width / 2 - cw / 2;
+    const ch = card.offsetHeight || 130;
+    let left = br.left + br.width / 2 - cw / 2;
     left = Math.max(12, Math.min(left, 375 - cw - 12));
-    let top = r.top + r.height + 10;
-    if (top + ch > 700) top = Math.max(100, r.top - ch - 10);   // 下方放不下就放上方
+    let top = br.top + br.height + 10;
+    if (top + ch > 700) top = Math.max(96, br.top - ch - 10);
     card.style.left = left + 'px';
     card.style.top = top + 'px';
-    card.style.transform = 'none';
+    card.classList.add('on');
   });
-});
-root.addEventListener('click', (e) => {
-  const t = e.target.closest('[data-action]');
-  if (!t) return;
-  if (t.dataset.action === 'close-hs') cards.forEach(c => c.classList.remove('on'));
-  if (t.dataset.action === 'collect') t.setAttribute('aria-pressed', t.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
-});
+  cardWrap.addEventListener('click', (e) => {
+    if (e.target.closest('[data-close]')) cards.forEach(c => c.classList.remove('on'));
+  });
+
+  const collect = q('[data-action="collect"]');
+  collect.addEventListener('click', () => {
+    const on = collect.getAttribute('aria-pressed') === 'true';
+    collect.setAttribute('aria-pressed', String(!on));
+    collect.style.color = on ? '' : 'var(--gold-500)';
+  });
+
+  if (params.get('state') === 'loading') {
+    const el = q('[data-state="loading"]');
+    el.hidden = false;
+    setTimeout(() => { el.hidden = true; }, 1400);
+  }
+})();
 </script>
 </body>
 </html>

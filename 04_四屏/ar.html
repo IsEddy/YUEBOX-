@@ -7,6 +7,7 @@
 <title>04 · AR 扫描页 · 唤物</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="motion.css">
 <link rel="stylesheet" href="s4.css">
 </head>
 <body>
@@ -27,6 +28,7 @@
     <div class="s4-frame" data-frame>
       <span class="cn"></span><span class="cn"></span><span class="cn"></span><span class="cn"></span>
       <span class="cross"></span>
+      <span class="scan-line" aria-hidden="true"></span>
     </div>
   </section>
 
@@ -100,6 +102,7 @@ function setStatus(t) { status.textContent = t; }
 
 function reset() {
   root.classList.remove('showing-result');
+  root.classList.remove('scanning');
   result.classList.remove('on');
   fail.hidden = true;
   particles.classList.remove('go');
@@ -109,6 +112,7 @@ function reset() {
 }
 
 function succeed() {
+  root.classList.remove('scanning');
   setStatus('它出来了。');
   frame.style.transform = 'scale(1)';
   particles.classList.add('go');
@@ -121,6 +125,7 @@ function succeed() {
 
 function scanning() {
   setStatus('正在唤醒它…');
+  root.classList.add('scanning');
   frame.style.transform = 'scale(1.06)';
   setTimeout(() => { frame.style.transform = 'scale(1)'; }, 240);
   setTimeout(succeed, 1200);

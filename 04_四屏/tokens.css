@@ -30,6 +30,15 @@
   --stroke-gold:1px;
   --shadow-1:0 2px 8px rgba(20,17,15,.12);
   --shadow-2:0 8px 24px rgba(20,17,15,.20);
+  /* 共享元素转场（按位移分档） */
+  --d-shared-near:300ms;--d-shared-far:360ms;--d-shared-back:255ms;
+  --d-scan:2000ms;--d-flash:120ms;
+  /* 金色四档不透明度 */
+  --gold-100:rgba(201,162,39,1);--gold-60:rgba(201,162,39,.6);
+  --gold-30:rgba(201,162,39,.3);
+  /* 装裱比例（天头:地头 = 6:4） */
+  --mount-top:30px;--mount-bottom:20px;--mount-side:16px;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--sp-7:48px;
   --d-micro:120ms;--d-fast:180ms;--d-base:240ms;--d-page:360ms;--d-ritual:1200ms;--d-draw:600ms;
   --ease-out:cubic-bezier(.16,1,.3,1);
   --ease-base:cubic-bezier(.22,.61,.36,1);

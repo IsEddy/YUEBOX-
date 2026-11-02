@@ -24,7 +24,7 @@
 #s4-ar .s4-frame .cross::after{top:50%;left:0;height:1px;width:100%}
 
 /* 示例区：3 枚等距 */
-#s4-ar .s4-examples{position:absolute;left:0;top:452px;width:100%;z-index:16}
+#s4-ar .s4-examples{position:absolute;left:0;top:452px;width:100%;z-index:5}
 #s4-ar .s4-examples .row{display:flex;justify-content:center;gap:20px}
 #s4-ar .s4-examples button{width:72px;border:0;background:transparent;padding:0;display:flex;flex-direction:column;align-items:center;gap:6px}
 #s4-ar .s4-examples .thumb{width:56px;height:56px;border-radius:var(--r-full);overflow:hidden;border:1px solid var(--ink-500);background:var(--ink-700)}
@@ -69,3 +69,21 @@
 #s4-ar .s4-particles i{position:absolute;width:3px;height:3px;background:var(--gold-300);border-radius:50%;opacity:0}
 #s4-ar .s4-particles.go i{animation:spark 900ms var(--ease-out) forwards}
 @keyframes spark{0%{opacity:0;transform:translateY(0) scale(.6)}30%{opacity:1}100%{opacity:0;transform:translateY(-26px) scale(1)}}
+
+/* 结果态：底部控件彻底让位（不可见 + 不可点） */
+#s4-ar.showing-result .s4-bottom{opacity:0;pointer-events:none;visibility:hidden}
+
+/* 结果卡：整卡穿透，只有「看看它」可点 */
+#s4-ar .s4-result{pointer-events:none}
+#s4-ar .s4-result.on{pointer-events:none}
+#s4-ar .s4-result.on .go{pointer-events:auto}
+
+/* 扫描线：2000ms 一轮，与 ring-breathe 同频 */
+#s4-ar .scan-line{position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,162,39,.9) 15%,rgba(201,162,39,.9) 85%,transparent);opacity:0;pointer-events:none}
+#s4-ar .scan-line::after{content:"";position:absolute;left:0;right:0;top:1px;height:24px;background:linear-gradient(180deg,rgba(201,162,39,.20),transparent);pointer-events:none}
+#s4-ar.scanning .scan-line{opacity:1;animation:scan-sweep var(--d-scan) linear infinite}
+@keyframes scan-sweep{0%{transform:translateY(0)}100%{transform:translateY(230px)}}
+
+/* 结果态：示例区不可点，避免挡住结果卡按钮 */
+#s4-ar.showing-result .s4-examples{pointer-events:none}
+#s4-ar.showing-result .s4-examples button{pointer-events:none}
