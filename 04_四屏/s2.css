@@ -25,9 +25,9 @@
 #s2-category .s2-seg-note{position:absolute;left:180px;top:210px;font:var(--t-tag);color:rgba(255,255,255,.45)}
 
 /* ---------- 馆藏精选 ---------- */
-#s2-category .s2-picks{position:absolute;left:0;top:256px;width:100%;height:96px;z-index:12}
+#s2-category .s2-picks{position:absolute;left:0;top:252px;width:100%;height:104px;z-index:12}
 #s2-category .s2-picks .rail-note{text-align:right}
-#s2-category .s2-picks .rail-note{position:absolute;right:24px;top:-18px;font:var(--t-tag);color:var(--gold-500)}
+#s2-category .s2-picks .rail-note{font:var(--t-tag);color:rgba(255,255,255,.4)}
 #s2-category .s2-picks .rail{display:flex;gap:8px;padding:0 24px;overflow-x:auto;scrollbar-width:none;height:80px}
 #s2-category .s2-picks .rail::-webkit-scrollbar{display:none}
 #s2-category .pick{flex:0 0 152px;height:68px;display:flex;gap:8px;padding:8px;background:var(--ink-700);border-radius:var(--r-box);border:1px solid rgba(201,162,39,.18)}
@@ -91,5 +91,11 @@
 #s2-category .drawer-scrim.open{display:block}
 
 /* 全馆藏品入口 */
-#s2-category .all-link{position:absolute;left:24px;top:-20px;font:var(--t-tag);color:var(--gold-500);z-index:20;min-height:20px;display:inline-block}
+.s2-picks .link-row{display:flex;align-items:center;justify-content:space-between;margin:0 24px 8px;padding-left:0}
+.s2-picks .links{display:flex;gap:16px}
+#s2-category .all-link{font:var(--t-tag);color:var(--gold-500);display:inline-block}
+#s2-category .venue-link{font:var(--t-tag);color:rgba(201,162,39,.7);display:inline-block}
 #s2-category .all-link svg{color:var(--gold-500);opacity:.8}
+
+/* 虚拟展厅入口 */
+#s2-category .venue-link{font:var(--t-tag);color:rgba(201,162,39,.7);display:inline-block}
