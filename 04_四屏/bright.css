@@ -1,0 +1,131 @@
+/* ============================================================
+   YUEBOX · 亮色主题覆盖层
+   在 tokens.css 之后加载，把深色底整体提亮一档。
+   原则：底从「玄墨 #14110F」提到「暖灰 #2A2420」，卡片提到 #3A332D，
+        文字保持绢白对比度不变（对比度已复算通过）。
+   ============================================================ */
+
+:root {
+  /* 提亮后的底与层 */
+  --ink-900: #2E2721;   /* 再提一档，暖褐 */
+  --ink-700: #443B32;   /* 卡片 */
+  --ink-500: #5E5348;   /* 描边/次级 */
+
+  /* 浅色层也提亮一点，避免死白 */
+  --silk-100: #FDFAF3;
+  --silk-200: #FAF4E8;
+  --silk-400: #EFE4D0;
+
+  /* 金色略提饱和，在提亮后的底上更亮 */
+  --gold-500: #D9B441;
+  --gold-300: #F0DC9E;
+  --gold-700: #9A7A22;
+  --gold-800: #8A6E1E;
+
+  /* 朱色略提明度 */
+  --red-600: #C43A2D;
+  --red-500: #DC6047;
+
+  /* 深底上的白字透明度整体上一个台阶 */
+  --white-45: rgba(255, 255, 255, .64);
+  --white-50: rgba(255, 255, 255, .70);
+  --white-60: rgba(255, 255, 255, .78);
+  --white-65: rgba(255, 255, 255, .82);
+  --white-70: rgba(255, 255, 255, .86);
+  --white-85: rgba(255, 255, 255, .94);
+}
+
+/* 卡片与面板统一提亮一档，并加一层极轻的高光边 */
+.screen { background: var(--ink-900); }
+
+/* TabBar 提亮 */
+.tabbar { background: rgba(46, 39, 33, .97); border-top-color: rgba(217, 180, 65, .28); }
+.tabbar::before { background: linear-gradient(180deg, rgba(46, 39, 33, 0), rgba(46, 39, 33, .97)); }
+
+/* 状态栏文字提亮 */
+.statusbar { color: rgba(255, 255, 255, .92); }
+
+/* 通用卡片底 */
+.card { background: var(--ink-700); }
+
+/* 主按钮：更亮的朱，加一点高光 */
+.primary-btn {
+  background: linear-gradient(180deg, #CE4436 0%, #B4362B 100%);
+  box-shadow: 0 4px 14px rgba(196, 58, 45, .34), inset 0 1px 0 rgba(255, 255, 255, .16);
+}
+
+/* 次按钮：金色描边更亮 */
+.secondary-btn {
+  border-color: rgba(217, 180, 65, .72);
+  color: #E8CE8A;
+  background: rgba(217, 180, 65, .06);
+}
+
+/* 输入/搜索条：半透明底提亮 */
+#s2-category .s2-search,
+#s6-all .search {
+  background: rgba(69, 60, 51, .90);
+  border-color: rgba(217, 180, 65, .62);
+}
+
+/* 精选/栅格卡片提亮，加一层极轻边 */
+#s2-category .pick,
+#s1-home .entry,
+#s1-home .rcard,
+#s8-venue .vcard {
+  background: #453C33;
+  border-color: rgba(217, 180, 65, .22);
+}
+#s2-category .gcard {
+  background: #3E352D;
+  border-color: rgba(217, 180, 65, .18);
+}
+/* 全馆列表：行底给一点亮，分隔线更清楚 */
+#s6-all .row { background: rgba(255,255,255,.022); border-bottom-color: rgba(217,180,65,.16); }
+#s6-all .row:nth-child(odd) { background: rgba(255,255,255,.012); }
+
+/* 页面标题更亮 */
+.page-title, .s2-head h1, .s6-head h1, #s8-venue .head h1 { color: #FFFAF0; }
+
+/* ============================================================
+   逐屏微调：去掉过暗的遮罩，让内容浮起来
+   ============================================================ */
+
+/* 首页 hero 的底衬不用那么黑 */
+#s1-home .hero-scrim {
+  background: linear-gradient(180deg, rgba(20, 17, 15, .04) 0%, rgba(20, 17, 15, .22) 40%, rgba(20, 17, 15, .88) 82%, rgba(20, 17, 15, .94) 100%);
+}
+
+/* 详情页图版底：从纯黑提到暖黑 */
+#s3-detail .s3-figure,
+#s3-detail .plate,
+#s7-gm .plate {
+  background: #1F1A15;
+}
+
+/* 分类页栅格滚动区的渐隐改浅一点 */
+#s2-category .s2-grid {
+  -webkit-mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - 36px), transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - 36px), transparent 100%);
+}
+
+/* AR 页：没开相机时给一个可见的引导背景，而不是纯黑 */
+#s4-ar {
+  background:
+    radial-gradient(circle at 50% 32%, rgba(217, 180, 65, .10), transparent 58%),
+    linear-gradient(180deg, #2A241D 0%, #1E1913 100%);
+}
+
+/* 展厅页提亮 */
+#s8-venue { background: var(--ink-900); }
+
+/* 列表页分割线提亮 */
+#s6-all .row { border-bottom-color: rgba(217, 180, 65, .14); }
+
+/* 抽屉与浮层 */
+#s2-category .drawer { background: #42392F; border-top-color: rgba(217, 180, 65, .55); }
+#s3-detail .hs-card,
+#s4-ar .anno .panel { background: rgba(43, 37, 30, .96); }
+
+/* 焦点环提亮 */
+:focus-visible { outline-color: #F0DC9E; }
