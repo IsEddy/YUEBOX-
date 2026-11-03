@@ -7,6 +7,7 @@
 <title>08 · 虚拟展厅 · 导览</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="bright.css">
+<link rel="stylesheet" href="back.css">
 <link rel="stylesheet" href="app.css">
 <link rel="stylesheet" href="motion.css">
 <link rel="stylesheet" href="s8.css">
@@ -38,6 +39,9 @@
     <span class="seq">08</span>
     <h1>虚拟展厅</h1>
     <p class="sub"><b data-el="count">—</b> 个线上展厅 · 点开即进</p>
+    <a class="head-back" href="splash.html" aria-label="返回上一页" data-back>
+      <svg aria-hidden="true"><use href="#ic-07"/></svg>
+    </a>
   </div>
 
   <section class="vlist" data-el="list"></section>
@@ -57,6 +61,7 @@
   <div class="home-indicator" aria-hidden="true"></div>
 </main>
 
+<script src="back.js"></script>
 <script src="data/gm-venues.js"></script>
 <script>
 /* 场馆数据：从 gdmuseum-relics.json 的 venues 抽取后内联 */

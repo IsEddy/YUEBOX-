@@ -1,0 +1,33 @@
+/* YUEBOX · 通用返回按钮样式（AR / 展厅等无顶栏页面） */
+
+.head-back {
+  position: absolute;
+  right: 18px;
+  top: 4px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(217, 180, 65, .42);
+  border-radius: var(--r-box);
+  background: rgba(46, 39, 33, .72);
+  color: var(--gold-300, #F0DC9E);
+  backdrop-filter: blur(6px);
+  z-index: 40;
+}
+
+.head-back:active {
+  background: rgba(46, 39, 33, .92);
+  transform: scale(.96);
+}
+
+.head-back svg {
+  width: 19px;
+  height: 19px;
+}
+
+/* AR 页的 head 里有相对定位的容器，需要 relative 才能定位 */
+#s4-ar .head,
+#s8-venue .head {
+  position: absolute;
+}

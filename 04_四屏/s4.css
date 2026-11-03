@@ -3,17 +3,18 @@
 #s4-ar{background:#000}
 
 /* ---------- 相机画面 ---------- */
-#s4-ar .cam{position:absolute;inset:0;overflow:hidden;background:#241F19}
+#s4-ar .cam{position:absolute;inset:0;overflow:hidden;background:#241F19;pointer-events:none}
 #s4-ar .cam video[hidden],#s4-ar .cam .demo-img[hidden]{display:none}
 /* 未开启相机时的引导底：馆藏图虚化 + 金边 */
 #s4-ar .cam-idle{position:absolute;inset:0;background-size:cover;background-position:center 28%;filter:blur(6px) brightness(.94) saturate(1.05);transform:scale(1.04)}
-#s4-ar .cam-idle-mask{position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,31,25,.62) 0%,rgba(36,31,25,.20) 26%,rgba(36,31,25,.24) 62%,rgba(30,25,19,.90) 100%)}
+#s4-ar .cam-idle-mask{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(36,31,25,.62) 0%,rgba(36,31,25,.20) 26%,rgba(36,31,25,.24) 62%,rgba(30,25,19,.90) 100%)}
 #s4-ar .cam video{width:100%;height:100%;object-fit:cover;display:block}
 #s4-ar .cam .demo-img{width:100%;height:100%;object-fit:cover;display:block}
 #s4-ar .cam-scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(20,17,15,.62),rgba(20,17,15,.16) 24%,rgba(20,17,15,.16) 68%,rgba(20,17,15,.84))}
 
 /* ---------- 顶部 ---------- */
 #s4-ar .head{position:absolute;left:0;top:60px;width:100%;padding:0 24px;z-index:20;pointer-events:none}
+#s4-ar .head .head-back{pointer-events:auto}
 #s4-ar .head .seq{display:block;font:var(--t-num);letter-spacing:.06em;color:var(--gold-500);line-height:16px}
 #s4-ar .head h1{margin:4px 0 6px;font:var(--t-h1);letter-spacing:.02em;color:var(--silk-200);line-height:36px}
 #s4-ar .head p{margin:0;font:var(--t-cap);color:rgba(255,255,255,.78);line-height:20px}
