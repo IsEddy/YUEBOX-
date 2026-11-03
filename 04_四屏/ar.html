@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=375, initial-scale=1">
 <meta name="dsh-design" content="app 375x812">
-<title>04 · 识别标注 · 唤物</title>
+<title>04 · 唤物 · 识别</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="app.css">
 <link rel="stylesheet" href="motion.css">
@@ -12,77 +12,65 @@
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
-  <symbol id="ic-01" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M12 5 19 9 12 13 5 9Z"/><path d="M5 9 12 13 12 19 5 15Z"/><path d="M12 13 19 9 19 15 12 19Z"/><path d="M9 9 15 9"/></g></symbol>
+  <symbol id="ic-01" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M12 5 19 9 12 13 5 9Z"/><path d="M5 9 12 13 12 19 5 15Z"/><path d="M12 13 19 9 19 15 12 19Z"/><path d="M9 9 15 9"/></g></symbol>
   <symbol id="ic-02" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="16" height="16"/><path d="M12 4v16M4 12h16"/><rect x="4" y="4" width="8" height="8" fill="currentColor" stroke="none"/></g></symbol>
-  <symbol id="ic-03" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="16" height="16"/><path d="M9 8v8M12 7v10M15 9v6"/></g></symbol>
   <symbol id="ic-04" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><rect x="10" y="10" width="4" height="4"/></g></symbol>
   <symbol id="ic-05" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="5" y="5" width="14" height="14"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></g></symbol>
-  <symbol id="ic-06" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="12" height="12"/><path d="m14 14 6 6"/></g></symbol>
-  <symbol id="ic-07" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M15 5 8 12l7 7"/></g></symbol>
-  <symbol id="ic-08" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M14 4h6v6M20 4l-9 9"/><path d="M15 10v10H4V10"/></g></symbol>
-  <symbol id="ic-09" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="16" height="16"/><path d="m10 8 6 4-6 4Z"/></g></symbol>
+  <symbol id="ic-07" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M15 5 8 12l7 7"/></g></symbol>
   <symbol id="ic-10" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M6 6l12 12M18 6 6 18"/></g></symbol>
-  <symbol id="ic-11" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="4" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="20" cy="12" r="1.5"/></g></symbol>
   <symbol id="ic-signal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M3 16v3M8 13v6M13 9v10M18 5v14"/></g></symbol>
   <symbol id="ic-wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 9a15 15 0 0 1 18 0M6 12a10 10 0 0 1 12 0M9 15a6 6 0 0 1 6 0"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></g></symbol>
   <symbol id="ic-battery" viewBox="0 0 28 24"><g fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="7" width="21" height="10" rx="1"/><path d="M25 10v4"/><rect x="4" y="9" width="14" height="6" fill="currentColor" stroke="none"/></g></symbol>
 </svg>
 
 <main id="s4-ar" class="screen" data-screen="S4" data-verb="唤物">
-  <section class="s4-cam" aria-hidden="true">
-    <img src="img/c2_shenkan_close.jpg" alt="">
+  <section class="cam">
+    <video data-el="video" playsinline muted autoplay></video>
+    <img data-el="demoimg" class="demo-img" alt="" hidden>
+    <span class="cam-scrim" aria-hidden="true"></span>
   </section>
 
-  <header class="s4-head">
+  <header class="head">
     <span class="seq">04</span>
     <h1>唤物</h1>
-    <p>对准展品，它会自己说话</p>
+    <p data-el="hint">对准展品，它会自己说话</p>
   </header>
 
-  <div class="detect" data-detect>
+  <div class="detect" data-el="detect">
     <span class="cn"></span><span class="cn"></span><span class="cn"></span><span class="cn"></span>
     <span class="glow"></span>
     <span class="scan"></span>
   </div>
 
-  <div class="anno" data-anno>
+  <div class="anno" data-el="anno">
     <div class="panel">
-      <p class="k"><span class="tw" data-anno-name></span></p>
-      <p class="v" data-anno-desc></p>
-      <p class="meta"><span data-anno-dyn></span><span class="sep">·</span><span data-anno-cat></span></p>
+      <p class="k"><span class="tw" data-el="aname"></span></p>
+      <p class="v" data-el="adesc"></p>
+      <p class="meta"><span data-el="adyn"></span><span class="sep">·</span><span data-el="acat"></span></p>
     </div>
     <div class="stem"></div>
     <div class="dot"></div>
   </div>
 
-  <div class="s4-particles" aria-hidden="true">
-    <i style="left:70px;top:320px"></i><i style="left:104px;top:306px"></i><i style="left:138px;top:324px"></i><i style="left:172px;top:308px"></i>
-    <i style="left:206px;top:326px"></i><i style="left:240px;top:312px"></i><i style="left:274px;top:328px"></i><i style="left:308px;top:316px"></i>
-    <i style="left:120px;top:356px"></i><i style="left:190px;top:362px"></i><i style="left:260px;top:358px"></i><i style="left:330px;top:346px"></i>
+  <div class="hit-tip" data-el="hit-tip" hidden>
+    <span class="conf" data-el="conf"></span>
+    <span class="hname" data-el="hname"></span>
   </div>
 
-  <div class="s4-bottom">
-    <p class="hint" data-status>把镜头对准展品</p>
+  <div class="bottom">
+    <div class="build" data-el="build" hidden>
+      <div class="bar"><i data-el="barfill"></i></div>
+      <span data-el="buildtxt">正在装载藏品库…</span>
+    </div>
+
     <div class="acts">
-      <button class="primary-btn" type="button" data-action="scan">开始识别</button>
-      <button class="secondary-btn" type="button" data-action="reset">重新对准</button>
+      <button class="primary-btn" type="button" data-action="start">
+        <svg width="18" height="18" aria-hidden="true"><use href="#ic-04"/></svg>开启相机识别
+      </button>
+      <button class="secondary-btn" type="button" data-action="demo">用示例画面试</button>
     </div>
+    <p class="foot">识别在本机完成，不上传照片</p>
   </div>
-
-  <div class="s4-corner-hint" aria-hidden="true"><span>YUEBOX · 识别即标注</span></div>
-
-  <section class="s4-fail" data-fail hidden>
-    <p>没认出来。换个角度、离近一点，或对准展签试试。</p>
-  </section>
-
-  <section class="s4-noperm" data-noperm hidden>
-    <div class="inner">
-      <svg width="32" height="32" style="margin:0 auto;color:var(--gold-500)" aria-hidden="true"><use href="#ic-04"/></svg>
-      <h2>没有相机也能玩</h2>
-      <p>进入演示模式，用示例画面体验识别标注。</p>
-      <button class="primary-btn" type="button" data-action="demo">进入演示模式</button>
-    </div>
-  </section>
 
   <nav class="tabbar" aria-label="主导航">
     <a href="splash.html"><svg aria-hidden="true"><use href="#ic-01"/></svg><span>宝盒</span></a>
@@ -93,185 +81,225 @@
   <div class="home-indicator" aria-hidden="true"></div>
 </main>
 
+<script src="vision.js"></script>
 <script src="data/relics.js"></script>
-<script src="motion.js"></script>
+<script src="data/gm-collection.js"></script>
 <script>
 (function () {
   const root = document.getElementById('s4-ar');
-  const p = new URLSearchParams(location.search);
-  const R = window.RELICS || {};
   const q = (s) => root.querySelector(s);
+  const V = window.YBX_VISION;
+  const R = window.RELICS || {};
+  const ALL = window.GM_COLLECTION || [];
 
-  const detect = q('[data-detect]');
-  const anno = q('[data-anno]');
-  const status = q('[data-status]');
-  const fail = q('[data-fail]');
-  const noperm = q('[data-noperm]');
-  const particles = q('.s4-particles');
+  const video = q('[data-el="video"]');
+  const demoimg = q('[data-el="demoimg"]');
+  const detect = q('[data-el="detect"]');
+  const anno = q('[data-el="anno"]');
+  const hint = q('[data-el="hint"]');
+  const buildBox = q('[data-el="build"]');
+  const barfill = q('[data-el="barfill"]');
+  const buildtxt = q('[data-el="buildtxt"]');
+  const hitTip = q('[data-el="hit-tip"]');
+  const confEl = q('[data-el="conf"]');
+  const hnameEl = q('[data-el="hname"]');
 
-  /* 识别目标：从文物库自动生成，不局限于固定几件。
-     每件的框位在画面里随机但不重叠，模拟「对准哪件就框哪件」。 */
-  const TARGETS = {};
-  (function buildTargets() {
-    const ids = Object.keys(R).slice(0, 8);
-    const slots = [
-      { x:10, y:14, w:78, h:62 },
-      { x:22, y:8,  w:54, h:76 },
-      { x:16, y:16, w:66, h:58 },
-      { x:26, y:20, w:48, h:50 },
-      { x:12, y:26, w:74, h:44 },
-      { x:18, y:10, w:62, h:70 },
-      { x:24, y:24, w:52, h:46 },
-      { x:14, y:18, w:70, h:56 }
-    ];
-    ids.forEach((id, i) => {
-      if (slots[i]) TARGETS[id] = slots[i];
+  let index = [];
+  let building = false;
+  let stream = null;
+  let loopTimer = null;
+  let mode = 'idle';
+  let lastHit = null;
+
+  function buildList() {
+    const out = [];
+    (window.FEATURED || []).forEach(id => {
+      const r = R[id];
+      if (r && r.img) out.push({ id: 'relic:' + id, name: r.name, img: r.img, src: 'relic', key: id });
     });
-  })();
+    // 本地缩略图优先（同源无跨域），其次才用远程原图
+    for (const it of ALL) {
+      if (!it.i) continue;
+      const src = it.t || it.i;
+      out.push({ id: 'gm:' + it.id, name: it.n, img: src, src: 'gm', key: it.id });
+      if (out.length >= 127) break;
+    }
+    return out;
+  }
 
-  let current = null;
+  async function ensureIndex() {
+    if (index.length || building) return;
+    building = true;
+    const list = buildList();
+    buildBox.hidden = false;
+    buildtxt.textContent = '正在装载藏品库（' + list.length + ' 件）…';
+    const raw = await V.buildIndex(list, (done, total) => {
+      const p = Math.round(done / total * 100);
+      barfill.style.width = p + '%';
+      buildtxt.textContent = '正在装载藏品库 ' + p + '%';
+    });
+    index = raw;
+    building = false;
+    buildBox.hidden = true;
+    hint.textContent = '藏品库已就绪 · ' + index.length + ' 件';
+  }
 
-  function reset() {
-    root.classList.remove('showing-result');
-    detect.classList.remove('on');
+  function grabFrame() {
+    if (mode === 'camera') return video.videoWidth ? video : null;
+    if (mode === 'demo') return demoimg.naturalWidth ? demoimg : null;
+    return null;
+  }
+
+  function recognizeOnce() {
+    const frame = grabFrame();
+    if (!frame || !index.length) return;
+    const res = V.match(index, frame, { threshold: 0.6 });
+    if (!res) return;
+    if (res.matched) {
+      if (lastHit && lastHit.id === res.item.id && Date.now() - lastHit.t < 2500) return;
+      lastHit = { id: res.item.id, t: Date.now() };
+      showHit(res);
+    } else {
+      showMiss(res);
+    }
+  }
+
+  function showHit(res) {
+    const it = res.item;
+    let detail = null;
+    if (it.src === 'relic') detail = R[it.key];
+    if (!detail && it.src === 'gm') detail = ALL.find(x => x.id === it.key);
+
+    place({ x: 12, y: 16, w: 76, h: 58 });
+
+    q('[data-el="aname"]').textContent = it.name;
+    var why = (detail && (detail.why || detail.desc)) || '';
+    q('[data-el="adesc"]').textContent = why ? why.slice(0, 60) : '识别到馆藏藏品，点开查看详情';
+    q('[data-el="adyn"]').textContent = (detail && (detail.dynasty || detail.d)) || '';
+    q('[data-el="acat"]').textContent = (detail && (detail.category || detail.c)) || '';
+
+    detect.classList.add('on');
+    root.classList.add('hit');
     anno.classList.remove('on');
-    particles.classList.remove('go');
-    fail.hidden = true;
-    status.textContent = '把镜头对准展品';
-    current = null;
+    requestAnimationFrame(function () {
+      anno.classList.add('on');
+      hitTip.hidden = false;
+      confEl.textContent = Math.round(res.confidence * 100) + '%';
+      hnameEl.textContent = it.name;
+    });
+    hint.textContent = '已识别 · ' + it.name;
+    anno.dataset.target = (it.src === 'gm' ? 'detail-gm.html?id=' + it.key : 'detail.html?id=' + it.key);
+  }
+
+  function showMiss(res) {
+    if (anno.classList.contains('on')) return;
+    root.classList.remove('hit');
+    detect.classList.remove('on');
+    hitTip.hidden = false;
+    confEl.textContent = Math.round((res.confidence || 0) * 100) + '%';
+    hnameEl.textContent = '未匹配（最接近 ' + (res.item ? res.item.name : '—') + '）';
+    hint.textContent = '把它放进取景框中央再试';
   }
 
   function place(t) {
     const r = root.getBoundingClientRect();
-    const TOP_SAFE = 170, BOT_SAFE = 700;
+    const TOP = 178, BOT = 700;
     const bx = r.width * t.x / 100;
     const bw = r.width * t.w / 100;
-    // 识别框限制在 170 ~ 700 之间
-    let by = Math.max(TOP_SAFE, r.height * t.y / 100);
-    let bh = r.height * t.h / 100;
-    if (by + bh > BOT_SAFE) bh = BOT_SAFE - by;
+    var by = Math.max(TOP, r.height * t.y / 100);
+    var bh = r.height * t.h / 100;
+    if (by + bh > BOT) bh = BOT - by;
     detect.style.left = bx + 'px';
     detect.style.top = by + 'px';
     detect.style.width = bw + 'px';
     detect.style.height = bh + 'px';
     detect.style.setProperty('--sh', Math.round(bh) + 'px');
 
-    const panel = anno.querySelector('.panel');
     const panelW = 240;
-    let ax = bx + bw / 2 - panelW / 2;
-    ax = Math.max(12, Math.min(ax, r.width - panelW - 12));
     anno.style.width = panelW + 'px';
-    const panelH = panel.offsetHeight || 92;
-    let ay = by - panelH - 26;
-    const above = ay >= 100;
-    if (!above) ay = by + bh + 16;
-    // 不许压到 TabBar（722 上沿）和底部按钮
-    // 标注卡必须完整落在安全区内（上 180 / 下 700）
-    const SAFE_BOTTOM = 700;
-    ay = Math.min(ay, SAFE_BOTTOM - panelH);
-    if (ay < 180) ay = Math.max(180, SAFE_BOTTOM - panelH);
-    if (ay + panelH > SAFE_BOTTOM) ay = SAFE_BOTTOM - panelH;
+    const panelH = Math.round(anno.querySelector('.panel').getBoundingClientRect().height) || 96;
+    var ax = bx + bw / 2 - panelW / 2;
+    ax = Math.max(12, Math.min(ax, r.width - panelW - 12));
+    // 标注卡固定在框下方，绝不压住框内提示
+    var ay = by + bh + 10;
+    var above = false;
+    if (ay + panelH > BOT) {
+      ay = by - panelH - 10;      // 下方放不下就放上方
+      above = true;
+    }
+    if (ay < TOP) ay = TOP;
+    if (ay + panelH > BOT) ay = BOT - panelH;
     anno.style.left = ax + 'px';
     anno.style.top = ay + 'px';
-    anno.style.width = panelW + 'px';
     anno.querySelector('.stem').style.display = above ? 'block' : 'none';
   }
 
-  function annotate(id) {
-    const relic = R[id];
-    const t = TARGETS[id];
-    if (!relic || !t) {
-      fail.hidden = false;
-      status.textContent = '没认出来，换个角度试试';
+  function startLoop() {
+    stopLoop();
+    loopTimer = setInterval(recognizeOnce, 700);
+    detect.classList.add('on');
+  }
+  function stopLoop() {
+    if (loopTimer) { clearInterval(loopTimer); loopTimer = null; }
+  }
+
+  async function startCamera() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      hint.textContent = '这个浏览器不支持相机，用示例画面试';
       return;
     }
-    current = id;
-
-    /* 1) 先填内容，再测高度（否则测到的是旧高度，文字会被裁） */
-    q('[data-anno-name]').textContent = relic.name;
-    q('[data-anno-desc]').textContent = relic.why;
-    q('[data-anno-dyn]').textContent = relic.dynasty;
-    q('[data-anno-cat]').textContent = relic.category;
-
-    /* 2) 放识别框 */
-    const r = root.getBoundingClientRect();
-    const TOP_SAFE = 178, BOT_SAFE = 700;
-    const bx = r.width * t.x / 100;
-    const bw = r.width * t.w / 100;
-    let by = Math.max(TOP_SAFE, r.height * t.y / 100);
-    let bh = r.height * t.h / 100;
-    if (by + bh > BOT_SAFE) bh = BOT_SAFE - by;
-    detect.style.left = bx + 'px';
-    detect.style.top = by + 'px';
-    detect.style.width = bw + 'px';
-    detect.style.height = bh + 'px';
-    detect.style.setProperty('--sh', Math.round(bh) + 'px');
-
-    /* 3) 内容已就位，此时测量才准确 */
-    const panelW = 240;
-    anno.style.width = panelW + 'px';
-    anno.style.left = '0px';
-    anno.style.top = '0px';
-    const panelH = Math.round(anno.querySelector('.panel').getBoundingClientRect().height) || 96;
-
-    let ax = bx + bw / 2 - panelW / 2;
-    ax = Math.max(12, Math.min(ax, r.width - panelW - 12));
-    let ay = by - panelH - 28;
-    let above = ay >= TOP_SAFE;
-    if (!above) ay = by + bh + 16;
-    /* 必须完整落在安全区内 */
-    if (ay + panelH > BOT_SAFE) ay = BOT_SAFE - panelH;
-    if (ay < TOP_SAFE) { ay = TOP_SAFE; above = false; }
-    anno.style.left = ax + 'px';
-    anno.style.top = ay + 'px';
-    anno.querySelector('.stem').style.display = above ? 'block' : 'none';
-
-    /* 4) 动画 */
-    detect.classList.add('on');
-    anno.classList.remove('on');
-    requestAnimationFrame(() => {
-      ano_show();
-    });
-    function ano_show() {
-      anno.classList.add('on');
-      status.textContent = '已识别 · ' + relic.name;
-      particles.classList.add('go');
-      root.classList.add('showing-result');
-      fail.hidden = true;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+      video.srcObject = stream;
+      await video.play().catch(function () {});
+      mode = 'camera';
+      demoimg.hidden = true;
+      video.hidden = false;
+      await ensureIndex();
+      hint.textContent = '把展品放进取景框 · 每 0.7 秒识别一次';
+      startLoop();
+    } catch (e) {
+      hint.textContent = '没有拿到相机权限，可以用示例画面试';
     }
   }
 
-  function scanning() {
-    reset();
-    status.textContent = '正在辨认…';
-    detect.style.left = '24px';
-    detect.style.top = '210px';
-    detect.style.width = '327px';
-    detect.style.height = '250px';
-    detect.style.setProperty('--sh', '250px');
-    detect.classList.add('on');
-    setTimeout(() => {
-      const ids = Object.keys(TARGETS);
-      annotate(ids[Math.floor(Math.random() * ids.length)]);
-    }, 1500);
+  async function startDemo() {
+    const firstRelic = (window.FEATURED || []).map(function (id) { return R[id]; })
+      .find(function (r) { return r && r.img; });
+    const firstGm = ALL.find(function (x) { return x.i; });
+    const pic = firstRelic ? { img: firstRelic.img, name: firstRelic.name } :
+      (firstGm ? { img: firstGm.i, name: firstGm.n } : null);
+    if (!pic) { hint.textContent = '藏品图不足，无法演示'; return; }
+    stopLoop();
+    if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
+    video.hidden = true;
+    demoimg.src = pic.img;
+    demoimg.hidden = false;
+    mode = 'demo';
+    await ensureIndex();
+    hint.textContent = '示例画面 · 正在比对藏品库';
+    startLoop();
   }
 
-  if (p.get('state') === 'noperm') noperm.hidden = false;
-  if (p.get('state') === 'fail') setTimeout(() => { fail.hidden = false; status.textContent = '没认出来'; }, 300);
-  if (p.get('state') === 'hit') setTimeout(() => annotate(p.get('id') || 'shenkan'), 400);
-
-  root.addEventListener('click', (e) => {
+  root.addEventListener('click', async function (e) {
     const t = e.target.closest('[data-action]');
     if (!t) return;
-    const a = t.dataset.action;
-    if (a === 'scan') scanning();
-    if (a === 'reset') reset();
-    if (a === 'demo') { noperm.hidden = true; scanning(); }
+    if (t.dataset.action === 'start') {
+      t.disabled = true;
+      t.textContent = '正在开启…';
+      await startCamera();
+      t.textContent = '相机已开启';
+    }
+    if (t.dataset.action === 'demo') {
+      await startDemo();
+    }
   });
 
-  anno.addEventListener('click', () => {
-    if (current) location.href = 'detail.html?id=' + current;
+  anno.addEventListener('click', function () {
+    if (anno.dataset.target) location.href = anno.dataset.target;
   });
+
+  setTimeout(function () { ensureIndex(); }, 600);
 })();
 </script>
 </body>
