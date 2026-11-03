@@ -56,7 +56,7 @@
     <span class="hero-img"><img data-el="hero-img" src="" alt=""></span>
     <span class="hero-scrim" aria-hidden="true"></span>
     <span class="hero-txt">
-      <span class="hero-tag">今日一件</span>
+      <span class="hero-tag">今日一件 · <b data-el="herodate"></b></span>
       <span class="hero-name" data-el="hero-name">—</span>
       <span class="hero-why" data-el="hero-why">—</span>
     </span>
@@ -106,6 +106,8 @@
 <script src="data/relics.js"></script>
 <script src="data/gm-collection.js"></script>
 <script src="data/gm-venues.js"></script>
+<script src="data/fingerprints.js"></script>
+<script src="daily.js"></script>
 <script>
 (function () {
   const root = document.getElementById('s1-home');
@@ -118,24 +120,49 @@
   q('[data-el="total"]').textContent = (ALL.length || 0).toLocaleString();
   q('[data-el="ven"]').textContent = V.length || 0;
 
-  const feat = (window.FEATURED || ['molong']);
-  const heroId = feat[0];
-  const hero = R[heroId] || {};
-  if (hero.img) {
-    q('[data-el="hero-img"]').src = hero.img;
-    q('[data-el="hero-img"]').alt = hero.name || '';
+  /* 今日一件：按日期从全馆藏品里轮换，不写死 */
+  const FP = window.YBX_FP || [];
+  const D = window.YBX_DAILY;
+  const today = D ? D.pickDaily(FP) : null;
+  if (today) {
+    /* hero 用原图（缩略图只有 200px，放大后糊）；加载失败退回缩略图 */
+    var heroImg = q('[data-el="hero-img"]');
+    heroImg.src = today.i || today.t;
+    heroImg.onerror = function () { heroImg.onerror = null; heroImg.src = today.t; };
+    heroImg.alt = today.n;
+    q('[data-el="hero-name"]').textContent = today.n;
+    const meta = [today.d, today.c].filter(Boolean).join(' · ');
+    q('[data-el="hero-why"]').textContent = meta || '今日馆藏';
+    q('[data-el="hero"]').href = 'detail-gm.html?id=' + today.id;
+  } else {
+    // 兜底：用精选第一件
+    const feat = (window.FEATURED || ['molong']);
+    const h0 = R[feat[0]] || {};
+    if (h0.img) q('[data-el="hero-img"]').src = h0.img;
+    q('[data-el="hero-name"]').textContent = h0.name || '—';
+    q('[data-el="hero-why"]').textContent = h0.why ? h0.why.slice(0, 24) + '…' : '';
+    q('[data-el="hero"]').href = 'detail.html?id=' + feat[0];
   }
-  q('[data-el="hero-name"]').textContent = hero.name || '—';
-  q('[data-el="hero-why"]').textContent = hero.why ? hero.why.slice(0, 24) + '…' : '';
-  q('[data-el="hero"]').href = 'detail.html?id=' + heroId;
 
-  q('[data-el="rail"]').innerHTML = feat.map(id => {
-    const r = R[id] || {};
-    return '<a class="rcard" href="detail.html?id=' + id + '">'
-      + '<span class="rc-img">' + (r.img ? '<img src="' + r.img + '" alt="' + (r.name||'') + '">' : '') + '</span>'
-      + '<span class="rc-name">' + (r.name || '') + '</span>'
-      + '<span class="rc-tag">' + (r.tag || '') + '</span></a>';
-  }).join('');
+  /* 横滑：今日三件，全部来自有缩略图的藏品 */
+  const three = D ? D.pickDailyN(FP, 3) : [];
+  if (three.length) {
+    q('[data-el="rail"]').innerHTML = three.map(function (x) {
+      return '<a class="rcard" href="detail-gm.html?id=' + x.id + '">'
+        + '<span class="rc-img"><img src="' + x.t + '" alt="' + x.n + '" loading="lazy"></span>'
+        + '<span class="rc-name">' + x.n + '</span>'
+        + '<span class="rc-tag">' + ([x.d, x.c].filter(Boolean)[0] || '馆藏') + '</span></a>';
+    }).join('');
+  } else {
+    const feat = (window.FEATURED || ['molong']);
+    q('[data-el="rail"]').innerHTML = feat.map(function (id) {
+      const r = R[id] || {};
+      return '<a class="rcard" href="detail.html?id=' + id + '">'
+        + '<span class="rc-img">' + (r.img ? '<img src="' + r.img + '" alt="' + (r.name||'') + '">' : '') + '</span>'
+        + '<span class="rc-name">' + (r.name || '') + '</span>'
+        + '<span class="rc-tag">' + (r.tag || '') + '</span></a>';
+    }).join('');
+  }
 
   const curtain = q('[data-curtain]');
   if (p.get('skip') === '1') {
@@ -147,6 +174,11 @@
     };
     setTimeout(kill, 1400);
     curtain.addEventListener('click', kill);
+  }
+
+  if (q('[data-el="herodate"]')) {
+    const t = new Date();
+    q('[data-el="herodate"]').textContent = (t.getMonth() + 1) + ' 月 ' + t.getDate() + ' 日';
   }
 
   q('[data-action="search"]').addEventListener('click', () => {
