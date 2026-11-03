@@ -48,8 +48,8 @@
     </button>
   </div>
 
-  <button class="s2-search enter" style="--i:1" type="button" data-action="search" aria-label="搜一件宝贝">
-    <svg aria-hidden="true"><use href="#ic-06"/></svg><span>搜一件宝贝</span>
+  <button class="s2-search enter" style="--i:1" type="button" data-action="search" aria-label="寻一件古物">
+    <svg aria-hidden="true"><use href="#ic-06"/></svg><span>寻一件古物</span>
   </button>
 
   <div class="s2-seg enter" style="--i:2" role="tablist" aria-label="视图切换" data-active="grid">
@@ -57,7 +57,7 @@
     <a role="tab" aria-selected="true" href="category.html" data-view-btn="grid">格</a>
     <a role="tab" aria-selected="false" href="category.html?view=axis" data-view-btn="axis">轴</a>
   </div>
-  <span class="s2-seg-note enter" style="--i:2">按工艺看，也按年代看</span>
+  <span class="s2-seg-note enter" style="--i:2">循工艺观览，亦可依年代探寻</span>
 
   <section class="s2-picks enter" style="--i:3">
     <div class="link-row">
@@ -65,7 +65,7 @@
         <a class="all-link" href="collection.html">全馆藏品 ›</a>
         <a class="venue-link" href="venues.html">虚拟展厅 ›</a>
       </span>
-      <span class="rail-note">约 8 分钟看完</span>
+      <span class="rail-note">约八分钟阅览</span>
     </div>
     <div class="rail" role="list" data-el="featured"></div>
   </section>
@@ -78,25 +78,25 @@
     <div class="axis-seg">
       <span class="node"></span>
       <h3>唐宋元</h3>
-      <p>墨龙图（南宋）· 南海丝路</p>
+      <p>墨龙图（南宋） · 南海丝路</p>
     </div>
     <div class="axis-seg">
       <span class="node"></span>
       <h3>明清</h3>
-      <p>大神龛（清）· 猴王砚（清光绪）· 广彩（清道光）</p>
+      <p>大神龛（清） · 猴王砚（清光绪） · 广彩（清道光）</p>
     </div>
     <div class="axis-seg">
       <span class="node"></span>
       <h3>近现代</h3>
-      <p>外销扇（19 世纪）· 金鸡报晓</p>
+      <p>外销扇（19 世纪） · 金鸡报晓</p>
     </div>
   </section>
 
   <section class="s2-empty" data-state="empty" hidden>
     <div class="inner">
       <svg width="32" height="32" aria-hidden="true"><use href="#ic-06"/></svg>
-      <h2>这一格还是空的</h2>
-      <p>换个词试试，或者从这三件开始</p>
+      <h2>此格暂未藏物</h2>
+      <p>换词检索，或从三件藏品起步</p>
       <div class="recs" data-el="recs"></div>
     </div>
   </section>
@@ -105,26 +105,10 @@
     <a href="splash.html"><svg aria-hidden="true"><use href="#ic-01"/></svg><span>宝盒</span></a>
     <a href="category.html" aria-current="page"><svg aria-hidden="true"><use href="#ic-02"/></svg><span>分格</span></a>
     <a href="ar.html"><svg aria-hidden="true"><use href="#ic-04"/></svg><span>唤物</span></a>
-    <a href="category.html?drawer=1"><svg aria-hidden="true"><use href="#ic-05"/></svg><span>藏印</span></a>
+    <a href="seal.html"><svg aria-hidden="true"><use href="#ic-05"/></svg><span>藏印</span></a>
   </nav>
   <div class="home-indicator" aria-hidden="true"></div>
 
-  <div class="drawer-scrim" data-action="close-drawer" aria-hidden="true"></div>
-  <section class="drawer" data-drawer="cangyin" aria-label="藏印抽屉" aria-hidden="true">
-    <button class="drawer-close" type="button" data-action="close-drawer" aria-label="关闭藏印">
-      <svg width="20" height="20" aria-hidden="true"><use href="#ic-10"/></svg>
-    </button>
-    <div class="handle" aria-hidden="true"></div>
-    <h2>藏印</h2>
-    <p>把喜欢的宝贝，收进你的印盒。</p>
-    <div class="seal" aria-hidden="true"><i></i></div>
-    <div class="acts">
-      <button class="primary-btn" type="button" data-action="seal">盖一枚印</button>
-      <button class="secondary-btn" type="button" data-action="share">
-        <svg width="16" height="16" aria-hidden="true"><use href="#ic-08"/></svg>分享卡片
-      </button>
-    </div>
-  </section>
 </main>
 
 <script src="back.js"></script>
@@ -188,26 +172,11 @@
   }
   if (p.get('state') === 'empty') showEmpty(true);
 
-  const drawer = q('[data-drawer]');
-  const scrim = q('.drawer-scrim');
-  function openDrawer(on) {
-    drawer.classList.toggle('open', on);
-    scrim.classList.toggle('open', on);
-    drawer.setAttribute('aria-hidden', String(!on));
-    root.classList.toggle('drawer-open', on);
-  }
-  if (p.get('drawer') === '1') openDrawer(true);
-
   root.addEventListener('click', (e) => {
     const t = e.target.closest('[data-action]');
     if (!t) return;
     const a = t.dataset.action;
-    if (a === 'search') { location.href = 'category.html?state=empty'; }
-    if (a === 'close-drawer') {
-      history.replaceState(null, '', 'category.html');
-      openDrawer(false);
-    }
-    if (a === 'seal') { t.textContent = '已收进印盒'; t.disabled = true; }
+    if (a === 'search') { location.href = 'collection.html?focus=1'; }
   });
 })();
 </script>

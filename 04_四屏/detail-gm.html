@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=375, initial-scale=1">
 <meta name="dsh-design" content="app 375x812">
-<title>藏品详情 · 导览</title>
+<title>藏品详情 · 阅览</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="bright.css">
 <link rel="stylesheet" href="app.css">
@@ -36,7 +36,7 @@
     </section>
     <section class="facts" data-el="facts"></section>
     <section class="note" data-el="note">
-      <p>这件藏品的详细说明以馆方发布为准。此处展示名称、年代、类别与尺寸等基础信息。</p>
+      <p>藏品详细解说以馆方资料为准，此处展示基础信息。</p>
     </section>
     <div class="pad" aria-hidden="true"></div>
   </div>
@@ -53,12 +53,13 @@
 
   <div class="cta-wrap">
     <a class="cta" href="ar.html">
-      <svg aria-hidden="true"><use href="#ic-04"/></svg>在馆里认出它
+      <svg aria-hidden="true"><use href="#ic-04"/></svg>于馆内辨识此物
     </a>
   </div>
 </main>
 
 <script src="back.js"></script>
+<script src="seals.js"></script>
 <script src="data/gm-collection.js"></script>
 <script>
 (function () {
@@ -98,12 +99,39 @@
   // 无额外说明时，淡化提示段
   if (!R.note) q('[data-el="note"]').classList.add('muted');
 
+  /* 收藏 = 真存进印盒（localStorage），跨页面跨会话保留 */
   const collect = q('[data-action="collect"]');
-  collect.addEventListener('click', () => {
-    const on = collect.getAttribute('aria-pressed') === 'true';
-    collect.setAttribute('aria-pressed', String(!on));
-    collect.style.color = on ? '' : 'var(--gold-500)';
-  });
+  const S = window.YBX_SEAL;
+  const sealItem = { id: R.id, n: R.n, d: R.d, c: R.c, t: R.t || '', i: R.i || '' };
+
+  function paintCollect() {
+    const on = S && S.has(R.id);
+    collect.setAttribute('aria-pressed', String(on));
+    collect.setAttribute('aria-label', on ? '已在印盒，点击取消' : '收藏这件');
+    collect.style.color = on ? 'var(--gold-500)' : '';
+    collect.style.borderColor = on ? 'var(--gold-500)' : '';
+    collect.classList.toggle('sealed', on);
+  }
+
+  if (S) {
+    paintCollect();
+    collect.addEventListener('click', () => {
+      const on = S.toggle(sealItem);
+      paintCollect();
+      // 盖印反馈：轻震 + 短暂提示
+      if (navigator.vibrate) navigator.vibrate(12);
+      collect.animate(
+        [{ transform: 'scale(1)' }, { transform: 'scale(.86)' }, { transform: 'scale(1)' }],
+        { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' }
+      );
+      const tip = document.querySelector('[data-el="sealtip"]');
+      if (tip) {
+        tip.textContent = on ? '已盖进印盒' : '已从印盒取出';
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 1400);
+      }
+    });
+  }
 })();
 </script>
 </body>

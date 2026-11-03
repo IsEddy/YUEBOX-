@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=375, initial-scale=1">
 <meta name="dsh-design" content="app 375x812">
-<title>06 · 全馆藏品 · 导览</title>
+<title>06 · 全馆藏品 · 阅览</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="bright.css">
 <link rel="stylesheet" href="app.css">
@@ -39,7 +39,7 @@
   <div class="head enter" style="--i:0">
     <span class="seq">06</span>
     <h1>全馆藏品</h1>
-    <p class="sub"><b data-el="count">—</b> 件 · 按类目与年代翻</p>
+    <p class="sub"><b data-el="count">—</b> 件 · 依类目、年代翻阅</p>
   </div>
 
   <!-- 搜索 -->
@@ -79,9 +79,9 @@
   <!-- 空态 -->
   <section class="empty" data-state="empty" hidden>
     <svg width="32" height="32" aria-hidden="true"><use href="#ic-06"/></svg>
-    <h2>没找到对应的藏品</h2>
-    <p>换个关键词，或清空筛选条件</p>
-    <button class="secondary-btn" type="button" data-action="clear">清空筛选</button>
+    <h2>未检索到相关藏品</h2>
+    <p>更换关键词，或清除筛选条件</p>
+    <button class="secondary-btn" type="button" data-action="clear">清除筛选</button>
   </section>
 
   <!-- TabBar -->
@@ -89,7 +89,7 @@
     <a href="splash.html"><svg aria-hidden="true"><use href="#ic-01"/></svg><span>宝盒</span></a>
     <a href="category.html"><svg aria-hidden="true"><use href="#ic-02"/></svg><span>分格</span></a>
     <a href="ar.html"><svg aria-hidden="true"><use href="#ic-04"/></svg><span>唤物</span></a>
-    <a href="category.html?drawer=1"><svg aria-hidden="true"><use href="#ic-05"/></svg><span>藏印</span></a>
+    <a href="seal.html"><svg aria-hidden="true"><use href="#ic-05"/></svg><span>藏印</span></a>
   </nav>
   <div class="home-indicator" aria-hidden="true"></div>
 </main>

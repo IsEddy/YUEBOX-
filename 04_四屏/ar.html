@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=375, initial-scale=1">
 <meta name="dsh-design" content="app 375x812">
-<title>04 · 唤物 · 识别</title>
+<title>04 · 唤物 · 识珍</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="bright.css">
 <link rel="stylesheet" href="back.css">
@@ -37,7 +37,7 @@
   <header class="head">
     <span class="seq">04</span>
     <h1>唤物</h1>
-    <p data-el="hint">对准展品，它会自己说话</p>
+    <p data-el="hint">对准展品，听它娓娓叙说</p>
     <a class="head-back" href="splash.html" aria-label="返回上一页" data-back>
       <svg aria-hidden="true"><use href="#ic-07"/></svg>
     </a>
@@ -46,7 +46,7 @@
   <div class="idle-tip" data-el="idletip">
     <div class="ic"><svg aria-hidden="true"><use href="#ic-04"/></svg></div>
     <h2>对准展品</h2>
-    <p>识别成功后，会在实物旁标出它的名字</p>
+    <p>识别完成，展品名称将标注于旁</p>
   </div>
 
   <div class="detect" data-el="detect">
@@ -73,23 +73,23 @@
   <div class="bottom">
     <div class="build" data-el="build" hidden>
       <div class="bar"><i data-el="barfill"></i></div>
-      <span data-el="buildtxt">正在装载藏品库…</span>
+      <span data-el="buildtxt">藏品库加载中…</span>
     </div>
 
     <div class="acts">
       <button class="primary-btn" type="button" data-action="start">
-        <svg width="18" height="18" aria-hidden="true"><use href="#ic-04"/></svg>开启相机识别
+        <svg width="18" height="18" aria-hidden="true"><use href="#ic-04"/></svg>启动相机识珍
       </button>
-      <button class="secondary-btn" type="button" data-action="demo">用示例画面试</button>
+      <button class="secondary-btn" type="button" data-action="demo">试看示例画面</button>
     </div>
-    <p class="foot">识别在本机完成，不上传照片</p>
+    <p class="foot">识别仅在本地运行，照片不上传</p>
   </div>
 
   <nav class="tabbar" aria-label="主导航">
     <a href="splash.html"><svg aria-hidden="true"><use href="#ic-01"/></svg><span>宝盒</span></a>
     <a href="category.html"><svg aria-hidden="true"><use href="#ic-02"/></svg><span>分格</span></a>
     <a href="ar.html" aria-current="page"><svg aria-hidden="true"><use href="#ic-04"/></svg><span>唤物</span></a>
-    <a href="category.html?drawer=1"><svg aria-hidden="true"><use href="#ic-05"/></svg><span>藏印</span></a>
+    <a href="seal.html"><svg aria-hidden="true"><use href="#ic-05"/></svg><span>藏印</span></a>
   </nav>
   <div class="home-indicator" aria-hidden="true"></div>
 </main>
@@ -253,7 +253,7 @@
 
   async function startCamera() {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      hint.textContent = '这个浏览器不支持相机，用示例画面试';
+      hint.textContent = '这个浏览器不支持相机，试看示例画面';
       return;
     }
     try {
@@ -268,7 +268,7 @@
       hint.textContent = '把展品放进取景框 · 每 0.7 秒识别一次';
       startLoop();
     } catch (e) {
-      hint.textContent = '没有拿到相机权限，可以用示例画面试';
+      hint.textContent = '没有拿到相机权限，可以试看示例画面';
     }
   }
 

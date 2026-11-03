@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=375, initial-scale=1">
+<meta name="dsh-design" content="app 375x812">
+<title>09 · 藏印 · 我的印盒</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="bright.css">
+<link rel="stylesheet" href="back.css">
+<link rel="stylesheet" href="motion.css">
+<link rel="stylesheet" href="s9.css">
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <symbol id="ic-01" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M12 5 19 9 12 13 5 9Z"/><path d="M5 9 12 13 12 19 5 15Z"/><path d="M12 13 19 9 19 15 12 19Z"/><path d="M9 9 15 9"/></g></symbol>
+  <symbol id="ic-02" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="4" y="4" width="16" height="16"/><path d="M12 4v16M4 12h16"/><rect x="4" y="4" width="8" height="8" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-04" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><rect x="10" y="10" width="4" height="4"/></g></symbol>
+  <symbol id="ic-05" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="5" y="5" width="14" height="14"/><circle cx="12" cy="12" r="2.4" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-07" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M15 5 8 12l7 7"/></g></symbol>
+  <symbol id="ic-10" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M6 6l12 12M18 6 6 18"/></g></symbol>
+  <symbol id="ic-11" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="4" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="20" cy="12" r="1.5"/></g></symbol>
+  <symbol id="ic-signal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M3 16v3M8 13v6M13 9v10M18 5v14"/></g></symbol>
+  <symbol id="ic-wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3 9a15 15 0 0 1 18 0M6 12a10 10 0 0 1 12 0M9 15a6 6 0 0 1 6 0"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="ic-battery" viewBox="0 0 28 24"><g fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="7" width="21" height="10" rx="1"/><path d="M25 10v4"/><rect x="4" y="9" width="14" height="6" fill="currentColor" stroke="none"/></g></symbol>
+</svg>
+
+<main id="s9-seal" class="screen" data-screen="S9" data-verb="藏印">
+  <header class="statusbar" aria-label="状态栏">
+    <span>9:41</span>
+    <span class="right">
+      <svg width="16" height="16" aria-hidden="true"><use href="#ic-signal"/></svg>
+      <svg width="16" height="16" aria-hidden="true"><use href="#ic-wifi"/></svg>
+      <svg width="22" height="16" aria-hidden="true"><use href="#ic-battery"/></svg>
+    </span>
+  </header>
+
+  <div class="head enter" style="--i:0">
+    <span class="seq">09</span>
+    <h1>我的印盒</h1>
+    <p class="sub">已藏 <b data-el="count">0</b> 枚 · 留存本机</p>
+    <a class="head-back" href="splash.html" aria-label="返回上一页" data-back>
+      <svg aria-hidden="true"><use href="#ic-07"/></svg>
+    </a>
+  </div>
+
+  <!-- 印盒封面：一排朱印，表示"被盖过的痕迹" -->
+  <section class="seal-case" aria-hidden="true">
+    <div class="case-inner">
+      <span class="stamp"></span><span class="stamp"></span><span class="stamp"></span>
+    </div>
+    <span class="case-label">印盒</span>
+  </section>
+
+  <!-- 收藏列表 -->
+  <section class="seal-list" data-el="list"></section>
+
+  <!-- 空态 -->
+  <section class="empty" data-el="empty" hidden>
+    <div class="empty-seal" aria-hidden="true"><span>空</span></div>
+    <h2>印盒尚空</h2>
+    <p>在藏品详情页点击右上角印鉴，<br>心仪古物便会钤入此处。</p>
+    <a class="primary-btn" href="collection.html">前去甄选</a>
+  </section>
+
+  <!-- 底部操作 -->
+  <div class="foot-acts" data-el="footacts" hidden>
+    <button class="secondary-btn" type="button" data-action="share">生成印谱卡</button>
+    <button class="text-btn" type="button" data-action="clear">清空印盒</button>
+  </div>
+
+  <nav class="tabbar" aria-label="主导航">
+    <a href="splash.html"><svg aria-hidden="true"><use href="#ic-01"/></svg><span>宝盒</span></a>
+    <a href="category.html"><svg aria-hidden="true"><use href="#ic-02"/></svg><span>分格</span></a>
+    <a href="ar.html"><svg aria-hidden="true"><use href="#ic-04"/></svg><span>唤物</span></a>
+    <a href="seal.html" aria-current="page"><svg aria-hidden="true"><use href="#ic-05"/></svg><span>藏印</span></a>
+  </nav>
+  <div class="home-indicator" aria-hidden="true"></div>
+</main>
+
+<script src="back.js"></script>
+<script src="seals.js"></script>
+<script>
+(function () {
+  const root = document.getElementById('s9-seal');
+  const q = (s) => root.querySelector(s);
+  const S = window.YBX_SEAL;
+
+  function fmtDate(ts) {
+    const d = new Date(ts || Date.now());
+    return (d.getMonth() + 1) + '月' + d.getDate() + '日';
+  }
+
+  function render() {
+    const items = S.list();
+    q('[data-el="count"]').textContent = items.length;
+    q('[data-el="empty"]').hidden = items.length > 0;
+    q('[data-el="footacts"]').hidden = items.length === 0;
+    q('[data-el="list"]').hidden = items.length === 0;
+
+    q('[data-el="list"]').innerHTML = items.map(function (x, i) {
+      const img = x.t ? '<img src="' + x.t + '" alt="' + (x.n || '') + '" loading="lazy">' : '';
+      const meta = [x.d, x.c].filter(Boolean).join(' · ');
+      return '<a class="seal-item" href="detail-gm.html?id=' + x.id + '" style="--i:' + i + '">'
+        + '<span class="si-img">' + img + '<span class="si-mark">印</span></span>'
+        + '<span class="si-body">'
+        + '<span class="si-name">' + (x.n || '') + '</span>'
+        + '<span class="si-meta">' + (meta || '馆藏') + '</span>'
+        + '</span>'
+        + '<span class="si-date">' + fmtDate(x.at) + '</span>'
+        + '<button class="si-del" type="button" data-del="' + x.id + '" aria-label="取消收藏">'
+        + '<svg width="15" height="15" aria-hidden="true"><use href="#ic-10"/></svg></button>'
+        + '</a>';
+    }).join('');
+
+    // 印盒封面：已藏藏就点亮
+    root.classList.toggle('has-seal', items.length > 0);
+  }
+
+  root.addEventListener('click', function (e) {
+    const del = e.target.closest('[data-del]');
+    if (del) {
+      e.preventDefault();
+      e.stopPropagation();
+      S.remove(del.dataset.del);
+      render();
+      return;
+    }
+    const act = e.target.closest('[data-action]');
+    if (!act) return;
+    if (act.dataset.action === 'clear') {
+      if (confirm('清空印盒？' + S.count() + ' 枚印会一起清掉。')) {
+        S.clear();
+        render();
+      }
+    }
+    if (act.dataset.action === 'share') {
+      act.textContent = '印谱卡已生成';
+      setTimeout(function () { act.textContent = '生成印谱卡'; }, 1600);
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

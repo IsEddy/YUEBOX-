@@ -1,0 +1,53 @@
+/* YUEBOX · 屏 9 · 我的印盒 */
+
+#s9-seal{background:var(--ink-900)}
+
+#s9-seal .head{position:absolute;left:0;top:60px;width:100%;padding:0 24px;z-index:20}
+#s9-seal .head .seq{display:block;font:var(--t-num);letter-spacing:.06em;color:var(--gold-500);line-height:16px}
+#s9-seal .head h1{margin:4px 0 6px;font:var(--t-h1);letter-spacing:.02em;color:#FFFAF0;line-height:36px}
+#s9-seal .head .sub{margin:0;font:var(--t-cap);color:rgba(255,255,255,.62)}
+#s9-seal .head .sub b{color:var(--gold-500);font:500 14px/18px YBX-Inter,sans-serif}
+
+/* ---------- 印盒封面 ---------- */
+#s9-seal .seal-case{position:absolute;left:24px;right:24px;top:150px;height:96px;border-radius:var(--r-box);background:linear-gradient(140deg,#4A3F34,#3A322A);border:1px solid rgba(217,180,65,.26);overflow:hidden;display:flex;align-items:center;z-index:14}
+#s9-seal .seal-case::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 30%,rgba(217,180,65,.16),transparent 62%);pointer-events:none}
+#s9-seal .case-inner{display:flex;gap:8px;padding-left:20px}
+#s9-seal .stamp{width:26px;height:26px;border:1.5px solid rgba(196,58,45,.5);border-radius:3px;background:rgba(196,58,45,.06);transition:border-color 300ms,background 300ms,transform 300ms}
+#s9-seal.has-seal .stamp{border-color:var(--red-600);background:rgba(196,58,45,.24);transform:rotate(-4deg)}
+#s9-seal.has-seal .stamp:nth-child(2){transform:rotate(3deg);transition-delay:60ms}
+#s9-seal.has-seal .stamp:nth-child(3){transform:rotate(-2deg);transition-delay:120ms}
+#s9-seal .case-label{position:absolute;right:20px;bottom:14px;font:500 11px/14px YBX-Sans,sans-serif;letter-spacing:.3em;color:rgba(240,220,158,.65)}
+
+/* ---------- 列表 ---------- */
+#s9-seal .seal-list{position:absolute;left:0;top:262px;bottom:98px;width:100%;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;z-index:12;padding:0 24px 24px;display:flex;flex-direction:column;gap:10px}
+#s9-seal .seal-list::-webkit-scrollbar{display:none}
+
+#s9-seal .seal-item{position:relative;display:flex;gap:12px;align-items:center;padding:10px 12px;background:#453C33;border:1px solid rgba(217,180,65,.18);border-radius:var(--r-box);animation:si-in 260ms var(--ease-out) both}
+@keyframes si-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#s9-seal .seal-item:active{transform:scale(.988);border-color:rgba(217,180,65,.42)}
+
+#s9-seal .si-img{position:relative;width:56px;height:56px;flex:0 0 56px;border-radius:var(--r-box);overflow:hidden;background:#1F1A15;display:grid;place-items:center}
+#s9-seal .si-img img{width:100%;height:100%;object-fit:cover}
+#s9-seal .si-mark{position:absolute;right:2px;bottom:2px;width:16px;height:16px;display:grid;place-items:center;background:var(--red-600);border-radius:2px;font:600 9px/1 YBX-Serif,serif;color:#FFF8EC;transform:rotate(-6deg);box-shadow:0 1px 3px rgba(0,0,0,.4)}
+
+#s9-seal .si-body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
+#s9-seal .si-name{font:600 14px/19px YBX-Serif,serif;color:#FFFAF0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#s9-seal .si-meta{font:var(--t-tag);color:var(--gold-500);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+#s9-seal .si-date{flex:0 0 auto;font:var(--t-tag);color:rgba(255,255,255,.4);align-self:flex-start;margin-top:2px}
+#s9-seal .si-del{position:absolute;right:8px;bottom:8px;width:26px;height:26px;display:grid;place-items:center;color:rgba(255,255,255,.34);border-radius:50%;background:rgba(20,17,15,.4)}
+#s9-seal .si-del:active{color:var(--red-500);background:rgba(196,58,45,.2)}
+
+/* ---------- 空态 ---------- */
+#s9-seal .empty{position:absolute;left:24px;right:24px;top:170px;bottom:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:16}
+#s9-seal .empty-seal{width:76px;height:76px;display:grid;place-items:center;border:2px dashed rgba(196,58,45,.48);border-radius:6px;margin-bottom:20px;transform:rotate(-3deg)}
+#s9-seal .empty-seal span{font:600 26px/1 YBX-Serif,serif;color:rgba(196,58,45,.62)}
+#s9-seal .empty h2{margin:0 0 10px;font:600 18px/25px YBX-Serif,serif;color:#FFFAF0}
+#s9-seal .empty p{margin:0 0 24px;font:var(--t-cap);color:rgba(255,255,255,.55);line-height:20px}
+#s9-seal .empty .primary-btn{width:100%;max-width:240px;height:46px;display:grid;place-items:center}
+
+/* ---------- 底部操作 ---------- */
+#s9-seal .foot-acts{position:absolute;left:24px;right:24px;bottom:112px;display:flex;flex-direction:column;gap:8px;z-index:18}
+#s9-seal .foot-acts .secondary-btn{height:42px}
+#s9-seal .foot-acts .text-btn{height:32px;font:var(--t-tag);color:rgba(255,255,255,.42);background:transparent;border:0}
+#s9-seal .foot-acts .text-btn:active{color:var(--red-500)}

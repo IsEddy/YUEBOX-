@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=375, initial-scale=1">
 <meta name="dsh-design" content="app 375x812">
-<title>03 · 文物详情 · 接近</title>
+<title>03 · 文物详情 · 观物</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="bright.css">
 <link rel="stylesheet" href="app.css">
@@ -49,13 +49,13 @@
     </section>
 
     <section class="s3-glance enter" style="--i:2">
-      <div class="glance-row"><span class="dot"></span><span class="k">是什么</span><p class="v" data-el="what"></p></div>
-      <div class="glance-row"><span class="dot"></span><span class="k">厉害在哪</span><p class="v" data-el="why"></p></div>
-      <div class="glance-row"><span class="dot"></span><span class="k">怎么看</span><p class="v" data-el="how"></p></div>
+      <div class="glance-row"><span class="dot"></span><span class="k">是何物</span><p class="v" data-el="what"></p></div>
+      <div class="glance-row"><span class="dot"></span><span class="k">妙在何处</span><p class="v" data-el="why"></p></div>
+      <div class="glance-row"><span class="dot"></span><span class="k">如何赏看</span><p class="v" data-el="how"></p></div>
     </section>
 
     <section class="s3-craft enter" style="--i:3">
-      <h2>工艺分解</h2>
+      <h2>工艺拆解</h2>
       <div class="craft-rail" data-el="craft"></div>
     </section>
 
@@ -76,16 +76,17 @@
 
   <div class="s3-cta-wrap">
     <a class="s3-cta" href="model3d.html?id=guangcai">
-      <svg aria-hidden="true"><use href="#ic-04"/></svg>唤出实物
+      <svg aria-hidden="true"><use href="#ic-04"/></svg>唤现实物
     </a>
   </div>
 
   <div class="s3-loading" data-state="loading" hidden>
-    <div><div class="ring" aria-hidden="true"></div><p>正在展开图版…</p></div>
+    <div><div class="ring" aria-hidden="true"></div><p>图版加载中…</p></div>
   </div>
 </main>
 
 <script src="back.js"></script>
+<script src="seals.js"></script>
 <script src="data/relics.js"></script>
 <script src="motion.js"></script>
 <script>
@@ -181,12 +182,39 @@
     if (e.target.closest('[data-close]')) cards.forEach(c => c.classList.remove('on'));
   });
 
+  /* 收藏 = 真存进印盒（localStorage），跨页面跨会话保留 */
   const collect = q('[data-action="collect"]');
-  collect.addEventListener('click', () => {
-    const on = collect.getAttribute('aria-pressed') === 'true';
-    collect.setAttribute('aria-pressed', String(!on));
-    collect.style.color = on ? '' : 'var(--gold-500)';
-  });
+  const S = window.YBX_SEAL;
+  const sealItem = { id: R.id, n: R.name, d: R.dynasty, c: R.category, t: R.img || '', i: R.img || '' };
+
+  function paintCollect() {
+    const on = S && S.has(R.id);
+    collect.setAttribute('aria-pressed', String(on));
+    collect.setAttribute('aria-label', on ? '已在印盒，点击取消' : '收藏这件');
+    collect.style.color = on ? 'var(--gold-500)' : '';
+    collect.style.borderColor = on ? 'var(--gold-500)' : '';
+    collect.classList.toggle('sealed', on);
+  }
+
+  if (S) {
+    paintCollect();
+    collect.addEventListener('click', () => {
+      const on = S.toggle(sealItem);
+      paintCollect();
+      // 盖印反馈：轻震 + 短暂提示
+      if (navigator.vibrate) navigator.vibrate(12);
+      collect.animate(
+        [{ transform: 'scale(1)' }, { transform: 'scale(.86)' }, { transform: 'scale(1)' }],
+        { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' }
+      );
+      const tip = document.querySelector('[data-el="sealtip"]');
+      if (tip) {
+        tip.textContent = on ? '已盖进印盒' : '已从印盒取出';
+        tip.classList.add('show');
+        setTimeout(() => tip.classList.remove('show'), 1400);
+      }
+    });
+  }
 
   const pimg = q('[data-el="img"]');
   if (pimg.complete) requestAnimationFrame(fitHotspotBox);
